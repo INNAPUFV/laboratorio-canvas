@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<title>Los 12 principios de la animación</title>
+<meta name="description" content="Animación interactiva: los 12 principios de la animación explicados con una pelota de baloncesto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Roboto+Slab:wght@400;600;700&family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#001a33;--blue:#003865;--acc:#cf2359;--sky:#649eff;--ondark:#cfe0f2;--bar:#00264a}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--navy);color:#fff;font-family:"Roboto Slab",Georgia,serif}
+.player{height:100vh;height:100dvh;display:flex;flex-direction:column;min-height:300px}
+.stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+canvas{display:block;cursor:pointer}
+.bigplay{position:absolute;inset:0;margin:auto;width:96px;height:96px;border-radius:50%;border:0;background:rgba(207,35,89,.92);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,0,0,.35);transition:transform .15s}
+.bigplay:hover{transform:scale(1.06)}
+.bigplay svg{width:42px;height:42px}
+.bigplay[hidden]{display:none}
+.bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--bar);border-top:1px solid rgba(100,158,255,.18)}
+.bar button,.bar select{height:36px;min-width:36px;border:0;border-radius:8px;background:transparent;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font:600 14px "Roboto Slab",serif}
+.bar button:hover,.bar select:hover{background:rgba(100,158,255,.16)}
+.bar button svg{width:20px;height:20px}
+.bar select{padding:0 6px;background:rgba(100,158,255,.1)}
+.bar select option{background:var(--navy)}
+#seek{flex:1;min-width:60px;accent-color:var(--acc);height:36px;cursor:pointer}
+#time{font:400 13px "Roboto Slab",serif;color:var(--ondark);white-space:nowrap;font-variant-numeric:tabular-nums}
+.chapters{display:flex;gap:5px;padding:8px 12px 10px;background:var(--bar);overflow-x:auto;scrollbar-width:thin}
+.chapters button{flex:0 0 auto;height:32px;padding:0 10px;border-radius:16px;border:1.5px solid rgba(207,224,242,.3);background:transparent;color:var(--ondark);font:600 13px "Roboto Slab",serif;letter-spacing:.04em;cursor:pointer}
+.chapters button:hover{border-color:var(--sky);color:#fff}
+.chapters button[aria-current="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.dl{margin-left:auto;font:400 12px "Roboto Slab",serif;color:var(--ondark);opacity:.75;white-space:nowrap;align-self:center;text-decoration:none}
+.dl:hover{opacity:1;text-decoration:underline}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:560px){#time{display:none}.bar{gap:2px;padding:6px 8px}.dl{display:none}}
+</style>
+</head>
+<body>
+<main class="player" id="player">
+  <div class="stage" id="stage">
+    <canvas id="cv" role="img" aria-label="Animación de una pelota de baloncesto que ilustra los 12 principios de la animación"></canvas>
+    <button class="bigplay" id="bigplay" aria-label="Reproducir animación"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+  </div>
+  <div class="bar">
+    <button id="play" aria-label="Reproducir" title="Reproducir / pausa (espacio)"></button>
+    <button id="prev" aria-label="Fotograma anterior" title="Fotograma anterior (←)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+    <button id="next" aria-label="Fotograma siguiente" title="Fotograma siguiente (→)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+    <input type="range" id="seek" min="0" step="0.0333" value="0" aria-label="Posición en la animación">
+    <span id="time">0:00 / 1:22</span>
+    <select id="speed" aria-label="Velocidad" title="Velocidad">
+      <option value="1">1×</option><option value="0.5">0,5×</option><option value="0.25">0,25×</option>
+    </select>
+    <button id="fs" aria-label="Pantalla completa" title="Pantalla completa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+  <nav class="chapters" id="chapters" aria-label="Ir a un principio"></nav>
+  <p class="sr" id="live" aria-live="polite"></p>
+</main>
+<script>
+"use strict";
+// ================================================================ utilidades
+const W = 1920, H = 1080, FPS = 30;
+const NAVY = '#001a33', BLUE = '#003865', ACC = '#cf2359', SKY = '#649eff', ONDARK = '#cfe0f2', WHITE = '#ffffff';
+const PF = 'Playfair Display', RS = 'Roboto Slab', AR = 'Arimo';
+const _cc = {};
+function col(h, a = 1) {
+  let c = _cc[h]; if (!c) { const x = h.replace('#', ''); c = _cc[h] = [parseInt(x.slice(0, 2), 16), parseInt(x.slice(2, 4), 16), parseInt(x.slice(4, 6), 16)]; }
+  return `rgba(${c[0]},${c[1]},${c[2]},${Math.max(0, Math.min(1, a))})`;
+}
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const smooth = t => { t = clamp(t); return t * t * (3 - 2 * t); };
+const eio = t => { t = clamp(t); return t < .5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2; };
+const eout = t => { t = clamp(t); return 1 - (1 - t) ** 3; };
+const eback = (t, s = 1.9) => { t = clamp(t) - 1; return t * t * ((s + 1) * t + s) + 1; };
+const win = (t, a, b, f = .3) => clamp((t - a) / f) * clamp((b - t) / f);
+const deg = Math.PI / 180;
+function rng(seed) { let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const uni = (r, a, b) => a + (b - a) * r();
+
+let ctx;
+function fnt(w, size, fam) { return `${w} ${size}px "${fam}"`; }
+function tw(s, f, track = 0) {
+  ctx.font = f; if (!track) return ctx.measureText(s).width;
+  let w = 0; for (const ch of s) w += ctx.measureText(ch).width; return w + track * (s.length - 1);
+}
+function text(s, x, y, fam, w, size, color, align = 'l', track = 0) {
+  const f = fnt(w, size, fam); const ww = tw(s, f, track);
+  if (align === 'c') x -= ww / 2; else if (align === 'r') x -= ww;
+  ctx.font = f; ctx.fillStyle = color; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+  if (!track) ctx.fillText(s, x, y);
+  else for (const ch of s) { ctx.fillText(ch, x, y); x += ctx.measureText(ch).width + track; }
+  return ww;
+}
+function wrap(s, f, maxw) {
+  const lines = []; let cur = '';
+  for (const wd of s.split(' ')) { const t = (cur + ' ' + wd).trim(); if (tw(t, f) > maxw && cur) { lines.push(cur); cur = wd; } else cur = t; }
+  if (cur) lines.push(cur); return lines;
+}
+function rrect(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+function line(x1, y1, x2, y2, c, w) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.strokeStyle = c; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.stroke(); }
+function circle(x, y, r, c) { ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fillStyle = c; ctx.fill(); }
+function ring(x, y, r, c, w) { ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.strokeStyle = c; ctx.lineWidth = w; ctx.stroke(); }
+function oval(x0, y0, x1, y1) { ctx.beginPath(); ctx.ellipse((x0 + x1) / 2, (y0 + y1) / 2, Math.abs(x1 - x0) / 2, Math.abs(y1 - y0) / 2, 0, 0, 2 * Math.PI); }
+function softOval(cx, cy, rx, ry, color, a, soft = .45) {
+  if (a <= 0 || rx <= 0) return;
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(1, ry / rx);
+  const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rx); g.addColorStop(0, col(color, a)); g.addColorStop(1 - soft, col(color, a * .85)); g.addColorStop(1, col(color, 0));
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, rx, 0, 2 * Math.PI); ctx.fill(); ctx.restore();
+}
+function pill(s, x, y, a = 1, o = {}) {
+  if (a <= .01) return;
+  const { color = WHITE, size = 18, align = 'l', bg = NAVY, bga = .78, border = null, ba = 0 } = o;
+  const f = fnt(600, size, RS), w = tw(s, f, 2), pad = 16, h = size * 2;
+  const x0 = align === 'l' ? x : align === 'c' ? x - (w + 2 * pad) / 2 : x - w - 2 * pad;
+  rrect(x0, y - h / 2, w + 2 * pad, h, h / 2); ctx.fillStyle = col(bg, bga * a); ctx.fill();
+  if (border && ba > 0) { ctx.strokeStyle = col(border, ba * a); ctx.lineWidth = 2.5; ctx.stroke(); }
+  text(s, x0 + pad, y + size * .36, RS, 600, size, col(color, a), 'l', 2);
+}
+function alphaDo(a, fn) { if (a <= .004) return; ctx.save(); ctx.globalAlpha *= a; fn(); ctx.restore(); }
+
+// ================================================================ escenario
+const GY = 880, HZ = 700, R = 90, MRG = 60;
+let BG = null;
+function makeBG() {
+  const cv = document.createElement('canvas'); cv.width = W + 2 * MRG; cv.height = H + 2 * MRG;
+  const sv = ctx; ctx = cv.getContext('2d'); ctx.translate(MRG, MRG);
+  const L = -MRG, T = -MRG, Rr = W + MRG, B = H + MRG;
+  let g = ctx.createLinearGradient(0, T, 0, HZ); g.addColorStop(0, '#0d2f52'); g.addColorStop(1, '#001a33'); ctx.fillStyle = g; ctx.fillRect(L, T, Rr - L, HZ - T);
+  g = ctx.createRadialGradient(1150, 560, 0, 1150, 560, 950); g.addColorStop(0, col('#245a8e', .45)); g.addColorStop(1, col('#245a8e', 0)); ctx.fillStyle = g; ctx.fillRect(L, T, Rr - L, HZ - T);
+  ctx.fillStyle = '#002446'; ctx.fillRect(L, HZ - 92, Rr - L, 92);
+  line(L, HZ - 92, Rr, HZ - 92, col(SKY, .22), 2);
+  for (let i = -1; i < 16; i++) line(i * 132, HZ - 92, i * 132, HZ, col('#0e3a66', .7), 1.5);
+  g = ctx.createLinearGradient(0, HZ, 0, B); g.addColorStop(0, '#dca46a'); g.addColorStop(.45, '#b8743c'); g.addColorStop(1, '#8a4e25'); ctx.fillStyle = g; ctx.fillRect(L, HZ, Rr - L, B - HZ);
+  for (let k = 1; k < 30; k++) { const y = HZ + (B - HZ) * (k / 30) ** 1.55; ctx.lineCap = 'butt'; ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(Rr, y); ctx.strokeStyle = col('#5e3213', .16); ctx.lineWidth = 1 + k / 18; ctx.stroke(); }
+  const vp = [960, HZ - 1700];
+  for (let xb = -2400; xb < 4400; xb += 140) { const tp = (B - HZ) / (B - vp[1]); const xt = xb + (vp[0] - xb) * tp; line(xt, HZ, xb, B, col('#5e3213', .09), 1.4); }
+  ctx.save(); ctx.beginPath(); ctx.rect(L, HZ, Rr - L, B - HZ); ctx.clip();
+  oval(960 - 1300, B + 230 - 430, 960 + 1300, B + 230 + 430); ctx.strokeStyle = col('#fff4e6', .7); ctx.lineWidth = 7; ctx.stroke();
+  line(L, HZ + 46, Rr, HZ + 46, col('#fff4e6', .45), 5);
+  g = ctx.createLinearGradient(0, HZ, 0, HZ + 140); g.addColorStop(0, col('#ffffff', .16)); g.addColorStop(1, col('#ffffff', 0)); ctx.fillStyle = g; ctx.fillRect(L, HZ, Rr - L, 140);
+  ctx.restore();
+  ctx.fillStyle = col('#000d1a', .9); ctx.fillRect(L, HZ - 5, Rr - L, 6);
+  ctx = sv; return cv;
+}
+
+// ================================================================ pelota 3D
+const Rx = a => { const c = Math.cos(a), s = Math.sin(a); return [1, 0, 0, 0, c, -s, 0, s, c]; };
+const Ry = a => { const c = Math.cos(a), s = Math.sin(a); return [c, 0, s, 0, 1, 0, -s, 0, c]; };
+const Rz = a => { const c = Math.cos(a), s = Math.sin(a); return [c, -s, 0, s, c, 0, 0, 0, 1]; };
+function mm(A, B) { const C = new Array(9); for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) C[i * 3 + j] = A[i * 3] * B[j] + A[i * 3 + 1] * B[3 + j] + A[i * 3 + 2] * B[6 + j]; return C; }
+const M3 = (...ms) => ms.reduce(mm);
+const ID = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+const NT = 241, TT = Array.from({ length: NT }, (_, i) => 2 * Math.PI * i / (NT - 1));
+const SA = 52 * deg;
+const SEAMS = [TT.map(t => [Math.cos(t), Math.sin(t), 0]), TT.map(t => [0, Math.sin(t), Math.cos(t)]),
+  TT.map(t => [Math.sin(SA) * Math.cos(t), Math.sin(SA) * Math.sin(t), Math.cos(SA)]),
+  TT.map(t => [Math.sin(SA) * Math.cos(t), Math.sin(SA) * Math.sin(t), -Math.cos(SA)])];
+const WIRE = [...[-60, -30, 0, 30, 60].map(l => TT.map(t => [Math.cos(l * deg) * Math.cos(t), Math.sin(l * deg), Math.cos(l * deg) * Math.sin(t)])),
+  ...[0, 30, 60, 90, 120, 150].map(o => TT.map(t => [Math.cos(t) * Math.cos(o * deg), Math.sin(t), Math.cos(t) * Math.sin(o * deg)]))];
+const PEBBLES = (() => { const r = rng(7), out = []; for (let i = 0; i < 520; i++) { const g = () => Math.sqrt(-2 * Math.log(r() + 1e-9)) * Math.cos(2 * Math.PI * r()); const v = [g(), g(), g()], n = Math.hypot(...v); out.push(v.map(x => x / n)); } return out; })();
+const Mspin = (t, rate = 1.1, tilt = .38, roll = .3) => M3(Rz(roll), Rx(tilt), Ry(t * rate));
+const Mroll = a => M3(Rz(a), Rx(.4), Ry(.7));
+const ap = (M, v) => [M[0] * v[0] + M[1] * v[1] + M[2] * v[2], M[3] * v[0] + M[4] * v[1] + M[5] * v[2], M[6] * v[0] + M[7] * v[1] + M[8] * v[2]];
+function curvesPath(curves, M, r) {
+  ctx.beginPath();
+  for (const cv of curves) { let prev = false; for (const p of cv) { const q = ap(M, p); if (q[2] > .02) { if (prev) ctx.lineTo(q[0] * r, q[1] * r); else ctx.moveTo(q[0] * r, q[1] * r); prev = true; } else prev = false; } }
+}
+function drawFace(r, f) {
+  ctx.save(); ctx.rotate(f.roll || 0);
+  const dark = '#1d0b03', [lx, ly] = f.look || [0, 0];
+  for (const side of [-1, 1]) {
+    let op = f.blink ?? 1; if (side === -1) op *= 1 - (f.wink || 0);
+    const ex = side * .31 * r, ey = -.12 * r;
+    if (op < .18) { ctx.beginPath(); ctx.moveTo(ex - .15 * r, ey + .02 * r); ctx.quadraticCurveTo(ex, ey - .1 * r, ex + .15 * r, ey + .02 * r); ctx.strokeStyle = dark; ctx.lineWidth = .055 * r; ctx.lineCap = 'round'; ctx.stroke(); }
+    else {
+      const ew = .15 * r, eh = .21 * r * op;
+      oval(ex - ew, ey - eh, ex + ew, ey + eh); ctx.fillStyle = '#fffaf3'; ctx.fill();
+      ctx.save(); ctx.clip();
+      const px = ex + lx * .055 * r, py = ey + ly * .06 * r + .02 * r;
+      circle(px, py, .095 * r, dark); circle(px - .035 * r, py - .04 * r, .032 * r, '#ffffff');
+      ctx.restore();
+      oval(ex - ew, ey - eh, ex + ew, ey + eh); ctx.strokeStyle = col('#3a1405', .8); ctx.lineWidth = .02 * r; ctx.stroke();
+    }
+  }
+  const sm = f.smile ?? 1;
+  ctx.beginPath(); ctx.moveTo(-.22 * r, .2 * r); ctx.quadraticCurveTo(0, .2 * r + .26 * r * sm, .22 * r, .2 * r); ctx.strokeStyle = dark; ctx.lineWidth = .055 * r; ctx.lineCap = 'round'; ctx.stroke();
+  for (const side of [-1, 1]) softOval(side * .5 * r, .15 * r, .13 * r, .065 * r, '#ff6f86', .45, .6);
+  ctx.restore();
+}
+function drawBall(x, y, r, sx = 1, sy = 1, phi = 0, M = null, alpha = 1, face = null, wire = 0, ghost = null) {
+  if (alpha <= .004) return;
+  ctx.save(); ctx.globalAlpha *= alpha; ctx.translate(x, y); ctx.rotate(phi); ctx.scale(sx, sy); ctx.rotate(-phi);
+  const ws = 1 / Math.sqrt(sx * sy); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  if (ghost) {
+    const [gc, fa, w] = ghost;
+    if (fa > 0) circle(0, 0, r, col('#ef7d2d', fa));
+    ring(0, 0, r, gc, w * ws);
+  } else {
+    let g = ctx.createRadialGradient(-.36 * r, -.42 * r, 0, -.36 * r, -.42 * r, 1.5 * r);
+    g.addColorStop(0, '#ffb46c'); g.addColorStop(.3, '#ef7d2d'); g.addColorStop(.72, '#cf5b1b'); g.addColorStop(1, '#6e2a0a');
+    circle(0, 0, r, g);
+    M = M || ID;
+    ctx.beginPath(); const pr = r * .014;
+    for (const p of PEBBLES) { const q = ap(M, p); if (q[2] > .15) { ctx.moveTo(q[0] * r + pr, q[1] * r); ctx.arc(q[0] * r, q[1] * r, pr, 0, 2 * Math.PI); } }
+    ctx.fillStyle = col('#5a2208', .22); ctx.fill();
+    curvesPath(SEAMS, M, r); ctx.strokeStyle = col('#2a1006', .92); ctx.lineWidth = r * .05; ctx.stroke();
+    g = ctx.createRadialGradient(0, 0, 0, 0, 0, r); g.addColorStop(0, col('#3d1404', 0)); g.addColorStop(.74, col('#3d1404', 0)); g.addColorStop(1, col('#3d1404', .5)); circle(0, 0, r, g);
+    g = ctx.createRadialGradient(.25 * r, .95 * r, 0, .25 * r, .95 * r, .75 * r); g.addColorStop(0, col('#ffc98a', .28)); g.addColorStop(1, col('#ffc98a', 0));
+    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 2 * Math.PI); ctx.clip(); ctx.fillStyle = g; ctx.fillRect(-r, -r, 2 * r, 2 * r); ctx.restore();
+    softOval(-.37 * r, -.5 * r, .26 * r, .17 * r, '#ffffff', .33, .7);
+    if (wire > 0) { curvesPath(WIRE, M, r); ctx.strokeStyle = col(SKY, wire); ctx.lineWidth = 2.2 * ws; ctx.stroke(); }
+    if (face) drawFace(r, face);
+    ring(0, 0, r, col('#2e1004', .9), 2.6 * ws);
+  }
+  ctx.restore();
+}
+function drawShadow(x, h, r, alpha = 1) {
+  const k = clamp(h / 650), rx = r * (1.08 - .55 * k), ry = rx * .2, b = 5 + 10 * k;
+  softOval(x, GY + 3, rx + b, ry + b * .6, '#2a1205', .6 * (1 - .75 * k) * alpha, .55);
+}
+function ballAt(x, cy, h, sx, sy, phi, r = R, M = null, o = {}) {
+  const { alpha = 1, face = null, wire = 0, refl = true, shadow = true } = o;
+  if (refl && alpha > 0) {
+    ctx.save(); ctx.beginPath(); ctx.rect(-MRG, GY, W + 2 * MRG, H + MRG - GY); ctx.clip(); ctx.translate(0, 2 * GY); ctx.scale(1, -1);
+    drawBall(x, cy, r, sx, sy, phi, M, .15 * alpha, face); ctx.restore();
+  }
+  if (shadow) drawShadow(x, h, r, alpha);
+  drawBall(x, cy, r, sx, sy, phi, M, alpha, face, wire);
+}
+
+// ================================================================ secuencias de bote
+const G = 4200;
+const air = (h, ks = .25, p0 = 0, p1 = 1, x0 = null, x1 = null, g = G) => ({ k: 'air', d: 2 * Math.sqrt(2 * h / g) * (p1 - p0), h, ks: ks * Math.min(1, Math.sqrt(h / 500)), p0, p1, x0, x1 });
+const airg = (h, ks, g) => air(h, ks, 0, 1, null, null, g);
+const contact = (sq, d = .1, x = null, ki = null, ko = null) => ({ k: 'contact', d, sq, x0: x, x1: x, ki, ko });
+const rest = (d, o = {}) => ({ k: 'rest', d, x0: o.x0 ?? null, x1: o.x1 ?? null, ease: o.ease || eio, wob: o.wob || 0, wobf: o.wobf || 3, wobk: o.wobk || 4 });
+const curve = (d, fn) => ({ k: 'curve', d, fn, x0: null, x1: null });
+function loop(n, h, sq, ks = .25, cd = .1, g = G) { const o = []; for (let i = 0; i < n; i++) o.push(contact(sq, cd), airg(h, ks, g)); return o; }
+class Seq {
+  constructor(items, x = 0, t0 = 0) {
+    const its = this.items = items.map(i => ({ ...i })); this.t0 = t0;
+    its.forEach((it, i) => {
+      if (it.k !== 'contact') return;
+      const pv = its[i - 1], nx = its[i + 1];
+      if (it.ki == null) it.ki = pv && pv.k === 'air' && pv.p1 > .99 ? pv.ks : 0;
+      if (it.ko == null) it.ko = nx && nx.k === 'air' && nx.p0 < .01 ? nx.ks : 0;
+    });
+    let t = 0; this.starts = []; for (const it of its) { this.starts.push(t); t += it.d; } this.total = t;
+    let lx = x; for (const it of its) { if (it.x0 == null) it.x0 = lx; if (it.x1 == null) it.x1 = it.x0; lx = it.x1; }
+  }
+  times(kind) { return this.items.map((it, i) => it.k === kind ? this.t0 + this.starts[i] : null).filter(v => v !== null); }
+  itemAt(t) {
+    t -= this.t0; if (t < 0) return [0, 0];
+    for (let i = 0; i < this.items.length; i++) if (t < this.starts[i] + this.items[i].d) return [i, (t - this.starts[i]) / this.items[i].d];
+    return [this.items.length - 1, 1];
+  }
+  at(t) {
+    const [i, q] = this.itemAt(t), it = this.items[i], k = it.k;
+    let x = lerp(it.x0, it.x1, q), h = 0, sy = 1, vx = 0, vy = 0;
+    if (k === 'air') {
+      const p = lerp(it.p0, it.p1, q); h = it.h * 4 * p * (1 - p); const v = 1 - 2 * p;
+      sy = 1 + it.ks * v * v; const dp = (it.p1 - it.p0) / it.d; vy = -it.h * 4 * v * dp; vx = (it.x1 - it.x0) / it.d;
+    } else if (k === 'contact') sy = 1 + it.ki * Math.max(0, 1 - 2 * q) ** 2 + it.ko * Math.max(0, 2 * q - 1) ** 2 - it.sq * Math.sin(Math.PI * q);
+    else if (k === 'rest') { x = lerp(it.x0, it.x1, it.ease(q)); const tt = q * it.d; sy = 1 + it.wob * Math.exp(-it.wobk * tt) * Math.sin(2 * Math.PI * it.wobf * tt); }
+    else if (k === 'curve') sy = it.fn(q);
+    let phi = 0;
+    if (k === 'air' && Math.abs(vx) + Math.abs(vy) > 1) { phi = Math.atan2(-vx, vy); while (phi > Math.PI / 2) phi -= Math.PI; while (phi <= -Math.PI / 2) phi += Math.PI; }
+    return { x, h, sx: 1 / sy, sy, phi, vx, vy, kind: k, q, i };
+  }
+}
+function cyOf(st, r = R) { const a = r * st.sx, b = r * st.sy; return GY - st.h - Math.sqrt((a * Math.sin(st.phi)) ** 2 + (b * Math.cos(st.phi)) ** 2); }
+function ballSeq(st, r = R, M = null, o = {}) { ballAt(st.x, cyOf(st, r), st.h, st.sx, st.sy, st.phi, r, M, o); }
+
+// ================================================================ escenas
+const BX = 1180;
+
+// 0 · INTRO
+const S0 = (() => {
+  const its = [air(440, .28, .5, 1), contact(.34), air(300, .28), contact(.28, .09), air(150, .28), contact(.18, .08), air(60, .28), contact(.1, .07), rest(3, { wob: .05 })];
+  let x = 2080; const vx = -420;
+  for (const it of its) { if (it.k === 'rest') { it.x0 = x; it.x1 = x - 60; it.ease = eout; } else { it.x0 = x; x += vx * it.d; it.x1 = x; } }
+  return new Seq(its, 2080, .4);
+})();
+function scIntro(t) {
+  const a1 = smooth((t - .2) / .6), a2 = smooth((t - .5) / .6), a3 = smooth((t - .9) / .6);
+  text('FUNDAMENTOS DE ANIMACIÓN', 120, 330 + 14 * (1 - a1), RS, 600, 24, col(SKY, a1), 'l', 4);
+  text('Los 12 principios', 116, 440 + 14 * (1 - a2), PF, 500, 96, col(WHITE, a2));
+  text('de la animación', 116, 548 + 14 * (1 - a2), PF, 500, 96, col(WHITE, a2));
+  text('explicados con una pelota de baloncesto', 120, 618 + 14 * (1 - a3), AR, 400, 32, col(ONDARK, a3));
+  const st = S0.at(t); ballSeq(st, R, Mroll(st.x / R));
+}
+
+// 1 · APLASTAR Y ESTIRAR
+const S1 = new Seq([air(520, .32, .5, 1), ...loop(5, 520, .36, .32)], BX);
+function sc1(t) {
+  const st = S1.at(t); ballSeq(st, R, Mspin(t));
+  const cur = st.sy > 1.07 ? 0 : st.sy < .93 ? 2 : 1;
+  [['ESTIRAR', 1.34], ['NORMAL', 1], ['APLASTAR', .64]].forEach(([lab, sy], i) => {
+    const x = 210 + i * 190, base = 572, r = 44, act = i === cur;
+    oval(x - r / sy, base - 2 * r * sy, x + r / sy, base);
+    if (act) { ctx.fillStyle = '#ef7d2d'; ctx.fill(); }
+    ctx.strokeStyle = act ? ACC : col(ONDARK, .45); ctx.lineWidth = 3; ctx.stroke();
+    text(lab, x, 616, RS, 600, 17, act ? WHITE : col(ONDARK, .55), 'c', 2);
+  });
+  text('misma área en las tres formas', 400, 652, AR, 400, 20, col(ONDARK, .7), 'c');
+}
+
+// 2 · ANTICIPACIÓN
+const S2 = new Seq([rest(.8), curve(1.1, q => 1 - .36 * eio(q)), curve(.25, q => .64 + .012 * Math.sin(q * 60)), curve(.1, q => lerp(.64, 1.3, eout(q))),
+  air(560, .3), contact(.38), air(220, .3), contact(.22, .09), air(80, .3), contact(.1, .08), rest(2, { wob: .06 })], BX);
+function sc2(t) {
+  const st = S2.at(t); ballSeq(st, R, Mspin(t * .7));
+  for (const [a, b, s] of [[.8, 2.25, '1 · PREPARACIÓN'], [2.25, 3.4, '2 · ACCIÓN'], [3.4, 5.4, '3 · REACCIÓN']]) pill(s, BX + 175, 640, win(t, a, b, .2), { border: ACC, ba: 1 });
+  const a = win(t, .9, 2.25, .2);
+  if (a > 0) {
+    const yy = 520 + 18 * Math.sin(t * 9);
+    line(BX - 230, yy - 60, BX - 230, yy + 40, col(ACC, a), 5);
+    ctx.beginPath(); ctx.moveTo(BX - 250, yy + 18); ctx.lineTo(BX - 230, yy + 44); ctx.lineTo(BX - 210, yy + 18); ctx.lineJoin = 'round'; ctx.stroke();
+  }
+}
+
+// 3 · PUESTA EN ESCENA
+const SX3 = 1280;
+const S3 = new Seq([air(300, .25, .5, 1), ...loop(6, 300, .28)], SX3);
+function sc3(t) {
+  const s = smooth((t - .4) / 1.1);
+  for (const [xx, rr] of [[470, 56], [760, 44], [1690, 60]]) { drawShadow(xx, 0, rr, 1 - .6 * s); drawBall(xx, GY - rr, rr, 1, 1, 0, Mroll(xx * .01), 1 - .55 * s); }
+  const st = S3.at(t); ballSeq(st, R, Mspin(t));
+  let g = ctx.createRadialGradient(SX3, 690, 0, SX3, 690, 640); g.addColorStop(0, col(NAVY, 0)); g.addColorStop(.36, col(NAVY, 0)); g.addColorStop(1, col(NAVY, .86 * s));
+  ctx.fillStyle = g; ctx.fillRect(-MRG, -MRG, W + 2 * MRG, H + 2 * MRG);
+  ctx.beginPath(); ctx.moveTo(SX3 - 70, -10); ctx.lineTo(SX3 + 70, -10); ctx.lineTo(SX3 + 250, GY + 30); ctx.lineTo(SX3 - 250, GY + 30); ctx.closePath();
+  g = ctx.createLinearGradient(0, 0, 0, GY); g.addColorStop(0, col('#ffffff', .2 * s)); g.addColorStop(1, col('#ffffff', .04 * s)); ctx.fillStyle = g; ctx.fill();
+  softOval(SX3, GY + 3, 270, 52, '#fff3d6', .22 * s, .5);
+  const gg = win(t, 1.8, 4.7, .5);
+  if (gg > 0) {
+    ctx.save(); ctx.setLineDash([14, 10]); ctx.strokeStyle = col(SKY, .7 * gg); ctx.lineWidth = 2; ctx.lineCap = 'butt';
+    for (const xx of [640, 1280]) { ctx.beginPath(); ctx.moveTo(xx, 0); ctx.lineTo(xx, H); ctx.stroke(); }
+    for (const yy of [360, 720]) { ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(W, yy); ctx.stroke(); }
+    ctx.restore();
+    ring(1280, 720, 11, col(SKY, gg), 3);
+    pill('REGLA DE LOS TERCIOS', 1300, 360, gg, { bg: BLUE, bga: .9, size: 16 });
+  }
+  pill('FOCO EN LO IMPORTANTE', SX3, 1010, win(t, 1.2, 5.3, .4), { align: 'c', border: ACC, ba: 1 });
+}
+
+// 4 · ACCIÓN DIRECTA Y POSE A POSE
+const P4 = new Seq([contact(.33, .1, 560), air(340, .25, 0, 1, 560, 1130), contact(.33), air(340, .25, 0, 1, 1130, 1700), contact(.33)], 560);
+const Ta = P4.items[1].d;
+const KEYT = [.05, .1 + Ta / 2, .15 + Ta, .2 + 1.5 * Ta, .25 + 2 * Ta];
+const INBT = [...[1, 2, 3, 5, 6, 7].map(k => .1 + Ta * k / 8), ...[1, 2, 3, 5, 6, 7].map(k => .2 + Ta + Ta * k / 8)];
+function sc4(t, D) {
+  const play = 3.9, dim = 1 - .55 * smooth((t - play + .3) / .3);
+  INBT.forEach((tt, j) => { const a = clamp((t - 1.9 - .09 * j) / .2) * .85 * dim; const st = P4.at(tt); drawBall(st.x, cyOf(st), R, st.sx, st.sy, st.phi, null, a, null, 0, [col(SKY), 0, 2.2]); });
+  KEYT.forEach((tt, i) => {
+    const a = clamp((t - .4 - .28 * i) / .22) * dim; const st = P4.at(tt), cy = cyOf(st);
+    drawBall(st.x, cy, R, st.sx, st.sy, st.phi, null, a, null, 0, [ACC, .38, 3.5]);
+    if (a > 0) text(`CLAVE ${i + 1}`, st.x, cy - R * st.sy - 22, RS, 600, 16, col(ACC, Math.min(1, a * 1.6)), 'c', 2);
+  });
+  if (t > play - .3) { const st = P4.at(clamp(t - play, 0, P4.total - .001)); ballSeq(st, R, Mroll(st.x / R), { alpha: smooth((t - play + .3) / .3) }); }
+  for (const [a, b, s] of [[.3, 1.85, '1 · POSES CLAVE'], [1.85, play - .1, '2 · INTERMEDIOS'], [play - .1, D, '3 · REPRODUCCIÓN']])
+    pill(s, 96, 1010, win(t, a, b, .2), { border: s[0] === '1' ? ACC : SKY, ba: 1 });
+}
+
+// 5 · ACCIÓN CONTINUADA Y SUPERPUESTA
+const RIMX = 1300, RIMY = 418, RIMW = 124, NETL = 168;
+const [TRAJ, TEX5, TLAND5, DT5] = (() => {
+  const g = 1800; let x = -80, y = 720; const apexy = 205, XE = 1255, YE = RIMY - 6;
+  let vy = -Math.sqrt(2 * g * (y - apexy)); const ta = -vy / g, tf = Math.sqrt(2 * (YE - apexy) / g); let vx = (XE - x) / (ta + tf);
+  const dt = 1 / 600; let t = 0; const traj = []; let ent = false, tex = null;
+  for (;;) {
+    const innet = y > YE - 4 && y < RIMY + NETL + R * .5 && Math.abs(x - RIMX) < RIMW + 30 && vy > 0;
+    if (innet) ent = true; if (ent && tex === null && !innet) tex = t;
+    traj.push([t, x, y, vx, vy, innet]);
+    if (y >= GY - R) break;
+    const [ax, ay] = innet ? [-15 * vx, g - 3 * vy] : [0, g];
+    vx += ax * dt; vy += ay * dt; x += vx * dt; y += vy * dt; t += dt;
+  }
+  return [traj, tex, t, dt];
+})();
+const T05 = .25, XL5 = TRAJ[TRAJ.length - 1][1];
+const S5 = new Seq([contact(.3, .1, null, .13), air(150, .25, 0, 1, XL5, XL5 + 60), contact(.2, .09), air(55, .25, 0, 1, XL5 + 60, XL5 + 84), contact(.1, .08),
+  rest(3, { x0: XL5 + 84, x1: XL5 + 110, ease: eout, wob: .08, wobf: 3.2, wobk: 3.2 })], XL5, T05 + TLAND5);
+function ball5(t) {
+  const tau = t - T05;
+  if (tau < TLAND5) {
+    const k = Math.floor(clamp(tau / DT5, 0, TRAJ.length - 1)); const [, x, y, vx, vy, inn] = TRAJ[k];
+    const sp = Math.hypot(vx, vy), sy = 1 + .16 * clamp(sp / 1600); let phi = Math.atan2(-vx, vy);
+    while (phi > Math.PI / 2) phi -= Math.PI; while (phi <= -Math.PI / 2) phi += Math.PI;
+    return [x, y, GY - (y + R), 1 / sy, sy, phi, -2.6 * Math.max(tau, 0), inn];
+  }
+  const st = S5.at(t), rl = -2.6 * TLAND5 + (st.x - XL5) / R;
+  return [st.x, cyOf(st), st.h, st.sx, st.sy, st.phi, rl, false];
+}
+function drawNet(t, bx, by, inn) {
+  const Mn = 9, Nn = 7, te = TEX5 != null ? T05 + TEX5 : 1e9, tau = t - te;
+  let sway = 0, st = 1;
+  if (tau > 0) { sway = 30 * Math.sin(2 * Math.PI * 1.6 * tau) * Math.exp(-2.2 * tau); st = 1 + .14 * Math.exp(-3 * tau) * Math.cos(2 * Math.PI * 2.1 * tau); }
+  let bump = 0;
+  if (inn || (by > RIMY - R && by < RIMY + NETL + R && Math.abs(bx - RIMX) < RIMW + 30 && tau < 0)) bump = 1;
+  if (bump) st = 1 + .3 * clamp((by - RIMY + R) / (NETL + R));
+  const pts = [];
+  for (let i = 0; i < Mn; i++) {
+    const u = lerp(-1, 1, i / (Mn - 1)), c = [];
+    for (let j = 0; j <= Nn; j++) {
+      const s = j / Nn, y = RIMY + NETL * s * st, xb = RIMX + lerp(RIMW * .97, RIMW * .58, s) * u;
+      const b = Math.exp(-(((y - by) / (R * .95)) ** 2)) * bump;
+      c.push([xb + u * b * 38 + (sway + (bx - RIMX) * .35 * bump) * s ** 1.4, y]);
+    }
+    pts.push(c);
+  }
+  ctx.beginPath();
+  for (let j = 0; j < Nn; j++) for (let i = 0; i < Mn - 1; i++) {
+    ctx.moveTo(...pts[i][j]); ctx.lineTo(...pts[i + 1][j + 1]); ctx.moveTo(...pts[i + 1][j]); ctx.lineTo(...pts[i][j + 1]);
+  }
+  for (const i of [0, Mn - 1]) { ctx.moveTo(...pts[i][0]); for (let j = 1; j <= Nn; j++) ctx.lineTo(...pts[i][j]); }
+  ctx.strokeStyle = col('#ffffff', .9); ctx.lineWidth = 2.6; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+}
+function sc5(t, D) {
+  ctx.fillStyle = '#7d93ab'; ctx.fillRect(1640, 300, 24, HZ + 8 - 300); ctx.fillRect(1478, 296, 172, 20);
+  ctx.fillStyle = '#5d728a'; ctx.fillRect(1626, HZ - 6, 52, 18);
+  rrect(1120, 186, 360, 246, 8); ctx.fillStyle = col('#f4f8fc', .95); ctx.fill(); ctx.strokeStyle = '#c3d2e3'; ctx.lineWidth = 7; ctx.stroke();
+  ctx.strokeStyle = ACC; ctx.lineWidth = 6; ctx.strokeRect(1226, 306, 148, 106);
+  const rim = (a0, a1, c, w) => { ctx.beginPath(); ctx.ellipse(RIMX, RIMY, RIMW, 15, 0, a0, a1); ctx.strokeStyle = c; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.stroke(); };
+  rim(Math.PI, 2 * Math.PI, '#b81d4d', 8);
+  const [x, cy, h, sx, sy, phi, rl, inn] = ball5(t);
+  ballAt(x, cy, h, sx, sy, phi, R, Mroll(rl));
+  drawNet(t, x, cy, inn);
+  rim(0, Math.PI, ACC, 9);
+  const te = T05 + TEX5;
+  let a = win(t, te + .1, te + 2.9, .3);
+  if (a > 0) { line(1450, 520, 1500, 520, col(WHITE, a * .8), 2); pill('LA RED SIGUE MOVIÉNDOSE', 1505, 520, a, { size: 17, border: SKY, ba: 1 }); }
+  a = win(t, T05 + TLAND5 + .2, D, .3);
+  pill('LA PELOTA VIBRA Y SE ASIENTA', XL5 + 110, 1010, a, { size: 17, align: 'c', border: ACC, ba: 1 });
+}
+
+// 6 · ENTRADAS Y SALIDAS LENTAS
+const G6 = 2600, H6 = 480;
+const S6 = new Seq([air(H6, .25, .5, 1, null, null, G6), ...loop(3, H6, .3, .25, .1, G6)], 1260, .15);
+const RULX = 1010;
+const TICKS6 = Array.from({ length: Math.floor(Math.sqrt(2 * H6 / G6) * 30) + 1 }, (_, k) => GY - R - H6 + .5 * G6 * (k / 30) ** 2);
+function sc6(t) {
+  const aA = clamp((4.25 - t) / .3);
+  alphaDo(aA, () => {
+    line(RULX, TICKS6[0] - 20, RULX, GY - R + 10, col(ONDARK, .35), 2);
+    for (const y of TICKS6) line(RULX - 16, y, RULX + 16, y, col(SKY, .9), 3);
+    const st = S6.at(t), cy = cyOf(st);
+    for (let k = 8; k > 0; k--) { const sk = S6.at(t - k / 30); drawBall(sk.x, cyOf(sk), R, sk.sx, sk.sy, sk.phi, null, .13 * (1 - k / 9), null, 0, [col(SKY), .3, 2]); }
+    circle(RULX, cy, 9, ACC);
+    line(RULX + 20, cy, st.x - R * st.sx - 10, cy, col(ACC, .5), 2);
+    ballSeq(st, R, Mspin(t));
+    text('FRENADA', RULX - 36, TICKS6[0] + 14, RS, 700, 26, SKY, 'r', 3);
+    text('fotogramas juntos', RULX - 36, TICKS6[0] + 46, AR, 400, 22, ONDARK, 'r');
+    text('ACELERACIÓN', RULX - 36, GY - R - 60, RS, 700, 26, ACC, 'r', 3);
+    text('fotogramas separados', RULX - 36, GY - R - 28, AR, 400, 22, ONDARK, 'r');
+  });
+  const tb = t - 4.55, DUR = 2.6, X0 = 470, X1 = 1560;
+  alphaDo(clamp((t - 4.25) / .3), () => {
+    const nf = Math.round(DUR * 30);
+    for (let k = 0; k <= nf; k++) if (tb >= k / 30) circle(lerp(X0, X1, eio(k / nf)), GY + 24, 5, col(WHITE, .95));
+    const x = lerp(X0, X1, eio(tb / DUR));
+    ballAt(x, GY - R, 0, 1, 1, 0, R, Mroll(x / R));
+    pill('ACELERA', 640, 1000, win(tb, .1, 9, .3), { align: 'c', border: ACC, ba: 1 });
+    pill('VELOCIDAD MÁXIMA', 1015, 1000, win(tb, 1.1, 9, .3), { align: 'c' });
+    pill('FRENA', 1390, 1000, win(tb, 1.8, 9, .3), { align: 'c', border: SKY, ba: 1 });
+  });
+}
+
+// 7 · ARCOS
+const S7 = (() => {
+  const vx = 360; let x = -70; const its = [air(420, .27, .5, 1)];
+  for (const h of [330, 230, 150, 90, 45]) its.push(contact(.3 * Math.min(1, h / 330) + .06, .09), air(h, .27));
+  its.push(contact(.08, .08));
+  for (const it of its) { it.x0 = x; x += vx * it.d; it.x1 = x; }
+  its.push(rest(1.5, { x0: x, x1: x + 170, ease: eout }));
+  return new Seq(its, -70, .25);
+})();
+const S7end = S7.t0 + S7.total;
+function sc7(t, D) {
+  const pts = []; for (let v = .25; v < Math.min(t, S7end); v += 1 / 30) { const s = S7.at(v); pts.push([s.x, cyOf(s)]); }
+  if (pts.length > 1) {
+    ctx.beginPath(); ctx.moveTo(...pts[0]); for (const p of pts.slice(1)) ctx.lineTo(...p);
+    ctx.strokeStyle = col(SKY, .35); ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.stroke();
+    pts.forEach((p, k) => { if (k % 2 === 0) circle(p[0], p[1], 4.5, col(SKY, .9)); });
+  }
+  const st = S7.at(t); ballSeq(st, R, Mroll(st.x / R));
+  pill('TRAYECTORIA EN ARCO', 96, 1010, win(t, .8, D, .4), { border: SKY, ba: 1 });
+}
+
+// 8 · ACCIÓN SECUNDARIA
+const S8 = new Seq([air(460, .27, .5, 1), ...loop(5, 460, .34, .27)], BX, .1);
+const IMP8 = S8.times('contact');
+function sc8(t, D) {
+  const st = S8.at(t);
+  IMP8.forEach((ti, n) => {
+    const tau = t - ti; if (tau < 0 || tau > 1) return;
+    const r = rng(n * 31 + 5), a = clamp((.5 - tau) / .5), rx = R * (1 + 3.2 * eout(tau / .5));
+    oval(BX - rx, GY - rx * .17 + 4, BX + rx, GY + rx * .17 + 4); ctx.strokeStyle = col('#fff4e6', .55 * a); ctx.lineWidth = 3; ctx.stroke();
+    for (let k = 0; k < 18; k++) {
+      const d = k % 2 ? -1 : 1, vx = d * uni(r, 160, 560), vy = -uni(r, 40, 260), r0 = uni(r, 9, 22);
+      const e = (1 - Math.exp(-3.2 * tau)) / 3.2, px = BX + d * R * .55 + vx * e, py = GY - 8 + vy * e + 140 * tau * tau;
+      const rr = r0 * (1 + 1.6 * tau); softOval(px, py, rr + 4, rr + 4, '#f3dfc3', .55 * (1 - tau) ** 2, .5);
+    }
+    const al = clamp((.28 - tau) / .28);
+    if (al > 0) for (const ang of [-160, -135, -110, -70, -45, -20]) {
+      const ar = ang * deg, r1 = R * 1.25 + 30 * eout(tau / .28), r2 = r1 + 38;
+      line(BX + r1 * Math.cos(ar), GY - R * .55 + r1 * Math.sin(ar) * .8, BX + r2 * Math.cos(ar), GY - R * .55 + r2 * Math.sin(ar) * .8, col(WHITE, al), 4);
+    }
+    const ao = clamp((.75 - tau) / .25);
+    if (ao > 0) {
+      const s = 70 * eback(tau / .22);
+      if (s > 1) {
+        ctx.save(); ctx.translate(BX - 300, GY - 230); ctx.rotate(-8 * deg);
+        ctx.font = fnt(700, s, PF); const w = ctx.measureText('¡PUM!').width; ctx.textAlign = 'left';
+        ctx.lineJoin = 'round'; ctx.lineWidth = 8; ctx.strokeStyle = col(WHITE, ao); ctx.strokeText('¡PUM!', -w / 2, s * .35);
+        ctx.fillStyle = col(ACC, ao); ctx.fillText('¡PUM!', -w / 2, s * .35); ctx.restore();
+      }
+    }
+  });
+  ballSeq(st, R, Mspin(t));
+  pill('PRINCIPAL · EL BOTE', 96, 1010, win(t, .9, D, .4), { border: ACC, ba: 1 });
+  pill('SECUNDARIA · POLVO, ONDA Y SONIDO', 430, 1010, win(t, 1.4, D, .4), { border: SKY, ba: 1 });
+}
+
+// 9 · TIMING
+const gL = 8 * 260 / .62 ** 2, gR = 8 * 520 / 1.3 ** 2;
+const S9L = new Seq([air(260, .3, .5, 1, null, null, gL), ...loop(9, 260, .3, .3, .08, gL)], 820, .1);
+const S9R = new Seq([air(520, .3, .5, 1, null, null, gR), ...loop(4, 520, .32, .3, .1, gR)], 1460, .1);
+function sc9(t, D) {
+  for (const [S, lab, sub, xx] of [[S9L, 'BOTE RÁPIDO · 21 FOTOGRAMAS', 'enérgico y con peso', 820], [S9R, 'BOTE LENTO · 42 FOTOGRAMAS', 'flotante y ligero', 1460]]) {
+    const st = S.at(t); ballSeq(st, R, Mspin(xx < 1000 ? t * 1.4 : t * .7));
+    const last = Math.max(-9, ...S.times('contact').filter(v => v <= t));
+    const fl = Math.exp(-7 * (t - last));
+    pill(lab, xx, 985, win(t, .3, D, .4), { align: 'c', border: ACC, ba: fl, size: 18 });
+    text(sub, xx, 1040, AR, 400, 22, col(WHITE, .92 * win(t, .5, D, .4)), 'c');
+  }
+}
+
+// 10 · EXAGERACIÓN
+const SXR = 1260;
+const S10 = new Seq([air(1050, .62, .5, 1), contact(.62, .16), air(1050, .62), contact(.6, .16), air(560, .55), contact(.45, .13),
+  air(180, .4), contact(.25, .1), rest(2.5, { wob: .12, wobf: 3.4, wobk: 3 })], SXR, .25);
+const S10L = new Seq([air(170, .06, .5, 1), ...loop(9, 170, .07, .06, .08)], 600, .1);
+const IMP10 = S10.times('contact').map((ti, i) => [ti, S10.items.filter(x => x.k === 'contact')[i].sq]);
+const CRACKS = (() => { const r = rng(4); return Array.from({ length: 8 }, () => Array.from({ length: 3 }, () => [uni(r, -1, 1), uni(r, .7, 1)])); })();
+function shake10(t) {
+  let dx = 0, dy = 0;
+  for (const [ti, sq] of IMP10) { const tau = t - ti; if (tau >= 0 && tau < .6) { const A = 24 * sq / .6 * Math.exp(-9 * tau); dx += A * Math.sin(53 * tau); dy += A * .7 * Math.cos(47 * tau); } }
+  return [dx, dy];
+}
+function sc10(t, D) {
+  const stl = S10L.at(t); ballSeq(stl, 60, Mspin(t));
+  pill('REALISTA', 600, 1000, win(t, .4, D, .4), { align: 'c' });
+  for (const [ti, sq] of IMP10) {
+    const tau = t - ti;
+    if (sq > .5 && tau >= 0 && tau < 2) {
+      const a = clamp((2 - tau) / .6), g = eout(tau / .12);
+      CRACKS.forEach((cr, n) => {
+        const ang = Math.PI * (n + .5) / CRACKS.length; let px = SXR, py = GY + 2;
+        ctx.beginPath(); ctx.moveTo(px, py);
+        cr.forEach(([j, s], k) => { const L = (55 + 35 * k) * s * g, a2 = ang + j * .3; px += L * Math.cos(a2); py += L * Math.sin(a2) * .25; ctx.lineTo(px, py); });
+        ctx.strokeStyle = col('#3b1c08', .75 * a); ctx.lineWidth = 3.2; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke();
+      });
+    }
+    if (tau >= 0 && tau < .3) {
+      const rr = Math.max(1, R * 3.3 * eout(tau / .2));
+      ctx.save(); ctx.translate(SXR, GY); ctx.scale(1.4, .75);
+      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rr); g.addColorStop(0, col('#ffffff', .55 * (1 - tau / .3))); g.addColorStop(1, col('#ffffff', 0));
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, rr, 0, 2 * Math.PI); ctx.fill(); ctx.restore();
+    }
+  }
+  const st = S10.at(t), cy = cyOf(st), sp = Math.abs(st.vy);
+  if (st.kind === 'air' && sp > 1700) {
+    const a = clamp((sp - 1700) / 1500), d = st.vy > 0 ? -1 : 1;
+    [-.62, -.3, 0, .3, .62].forEach((o, k) => { const L = (.09 + .05 * (k % 2)) * sp, y0 = cy + d * (R * st.sy + 24); line(SXR + o * R * st.sx, y0, SXR + o * R * st.sx, y0 + d * L, col(WHITE, .65 * a), 4); });
+  }
+  ballSeq(st, R, Mspin(t * 1.6));
+  pill('EXAGERADO', SXR, 1000, win(t, .4, D, .4), { align: 'c', border: ACC, ba: 1 });
+}
+
+// 11 · DIBUJO SÓLIDO
+const R11 = 150, X11 = 1230;
+const S11 = new Seq([air(70, .05, .5, 1, null, null, 1400), ...loop(8, 70, .07, .05, .12, 1400)], X11, .1);
+function sc11(t) {
+  const st = S11.at(t), cy = cyOf(st, R11);
+  const M = M3(Rz(.35), Rx(.55 + .25 * Math.sin(t * .9)), Ry(t * 1.15));
+  ballAt(st.x, cy, st.h, st.sx, st.sy, st.phi, R11, M, { wire: .85 * win(t, 1.3, 5, .5) });
+  let a = win(t, 1.5, 5.4, .4);
+  if (a > 0) {
+    const ex = X11 - 135, ey = cy - 115, ang = Math.atan2(ey - 420, ex - 880), c = col('#ffe7b8', .9 * a);
+    line(880, 420, ex, ey, c, 4);
+    for (const s of [-1, 1]) line(ex, ey, ex - 22 * Math.cos(ang + s * .45), ey - 22 * Math.sin(ang + s * .45), c, 4);
+    pill('LUZ', 868, 420, a, { align: 'r', border: '#ffe7b8', ba: 1 });
+  }
+  a = win(t, 2, 5.4, .4);
+  if (a > 0) { line(X11 + R11 + 12, cy - 40, X11 + R11 + 70, cy - 40, col(WHITE, .8 * a), 2); pill('VOLUMEN EN 3D', X11 + R11 + 76, cy - 40, a, { border: SKY, ba: 1 }); }
+  pill('SOMBRA = PESO Y CONTACTO', X11, 1010, win(t, 2.5, 5.4, .4), { align: 'c', border: ACC, ba: 1 });
+}
+
+// 12 · ATRACTIVO
+const R12 = 100, X12 = 1200;
+const S12 = new Seq([rest(1.5), curve(.6, q => 1 - .3 * eio(q)), curve(.12, q => lerp(.7, 1.28, eout(q))), air(330, .28),
+  contact(.34), air(110, .28), contact(.16, .09), rest(3, { wob: .07 })], X12, .1);
+const A12 = S12.items[3], T12A = S12.t0 + S12.starts[3], T12L = T12A + A12.d;
+const CONF = (() => { const r = rng(12), cs = [ACC, SKY, WHITE, '#ffb46c', '#ffd23f']; return Array.from({ length: 70 }, () => [uni(r, -1, 1), uni(r, .4, 1), cs[Math.floor(r() * 5)], uni(r, 0, 6.28), uni(r, -8, 8)]); })();
+function sc12(t, D) {
+  const st = S12.at(t);
+  const roll = T12A <= t && t <= T12L ? 2 * Math.PI * eio((t - T12A) / A12.d) : 0;
+  if (t > 4.3) { const k = 1 + .07 * smooth((t - 4.3) / .35); st.sy *= k; st.sx = 1 / st.sy; }
+  let look = t < .7 ? [-1, 0] : t < 1.25 ? [1, -.3] : [0, 0];
+  if (t > 1.5 && t < 2.2) look = [0, .6];
+  const blink = t > 1.3 && t < 1.48 ? 1 - Math.sin(Math.PI * clamp((t - 1.3) / .18)) : 1;
+  const wink = t > 4.7 && t < 5.2 ? Math.sin(Math.PI * clamp((t - 4.7) / .5)) : 0;
+  let smile = t < 3.2 ? .55 : 1.25; if (t > 1.5 && t < 2.25) smile = .2;
+  const face = { look, blink, wink, smile, roll };
+  const M = mm(Rz(roll), Rx(-.2));
+  const tau = t - T12L;
+  if (tau > 0) for (const [u, v, c, a0, w] of CONF) {
+    const vx = u * 620, vy = -v * 950 - 250, e = (1 - Math.exp(-1.6 * tau)) / 1.6;
+    const px = X12 + vx * e, py = GY - 2 * R12 + vy * e + 330 * tau * tau, al = clamp((2.7 - tau) / .5);
+    if (al <= 0 || py > H + 20) continue;
+    ctx.save(); ctx.translate(px, py); ctx.rotate(a0 + w * tau); ctx.fillStyle = col(c, al); ctx.fillRect(-9, -4, 18, 8); ctx.restore();
+  }
+  ballSeq(st, R12, M, { face });
+  pill('PERSONALIDAD · CARISMA · EXPRESIÓN', X12, 1010, win(t, 3.4, D, .4), { align: 'c', border: ACC, ba: 1 });
+}
+
+// 13 · RESUMEN
+const NAMES = ['Aplastar y estirar', 'Anticipación', 'Puesta en escena', 'Acción directa y pose a pose', 'Acción continuada y superpuesta',
+  'Entradas y salidas lentas', 'Arcos', 'Acción secundaria', 'Timing', 'Exageración', 'Dibujo sólido', 'Atractivo'];
+const SOUT = new Seq([air(380, .28, .5, 1), ...loop(8, 380, .34, .28)], 1600, .2);
+function scOut(t) {
+  const a = smooth((t - .1) / .5);
+  text('RESUMEN', 120, 132, RS, 600, 22, col(SKY, a), 'l', 4);
+  text('Los 12 principios de la animación', 116, 206, PF, 500, 62, col(WHITE, a));
+  NAMES.forEach((nm, i) => {
+    const c = Math.floor(i / 6), r = i % 6, aa = smooth((t - .4 - .12 * i) / .35), x = 120 + c * 640, y = 300 + r * 64;
+    text(String(i + 1).padStart(2, '0'), x, y + 6 * (1 - aa), RS, 700, 26, col(ACC, aa));
+    text(nm, x + 58, y + 6 * (1 - aa), PF, 400, 33, col(WHITE, aa));
+  });
+  const st = SOUT.at(t); ballSeq(st, R, Mspin(t));
+}
+
+// ================================================================ guion
+const SCENES = [
+  [3.6, scIntro, null, null],
+  [5.5, sc1, ['Aplastar y estirar', 'Squash and stretch', 'Se estira al caer y se aplasta al chocar, pero conserva siempre su volumen.'], null],
+  [6.0, sc2, ['Anticipación', 'Anticipation', 'Antes de saltar, se encoge y toma impulso: el público intuye lo que va a pasar.'], null],
+  [5.5, sc3, ['Puesta en escena', 'Staging', 'Luz, encuadre y composición dirigen la mirada hacia lo importante.'], null],
+  [6.8, sc4, ['Acción directa y pose a pose', 'Straight ahead & pose to pose', 'Primero se fijan las poses clave; después se dibujan los intermedios.'], null],
+  [6.2, sc5, ['Acción continuada y superpuesta', 'Follow through & overlapping action', 'Cuando la pelota ya ha pasado, la red sigue moviéndose; al caer, la pelota vibra antes de asentarse.'], null],
+  [7.6, sc6, ['Entradas y salidas lentas', 'Slow in & slow out · aceleración y frenada', 'Al frenar, los fotogramas se juntan; al acelerar, se separan.'], null],
+  [5.6, sc7, ['Arcos', 'Arcs', 'Los movimientos naturales describen trayectorias curvas, no líneas rectas.'], null],
+  [5.6, sc8, ['Acción secundaria', 'Secondary action', 'Polvo, onda y sonido refuerzan el bote sin robarle el protagonismo.'], null],
+  [5.6, sc9, ['Timing', 'Sincronización', 'El número de fotogramas marca el ritmo y el peso: el mismo bote transmite dos sensaciones.'], null],
+  [6.0, sc10, ['Exageración', 'Exaggeration', 'Llevar la acción más allá de lo real la hace más clara y expresiva.'], shake10],
+  [6.0, sc11, ['Dibujo sólido', 'Solid drawing', 'Volumen, luz y perspectiva: la pelota es una esfera en tres dimensiones.'], null],
+  [6.2, sc12, ['Atractivo', 'Appeal', 'Personalidad y carisma hacen que el público quiera seguir mirando.'], null],
+  [6.0, scOut, null, null],
+];
+const STARTS = [0]; for (const s of SCENES) STARTS.push(STARTS[STARTS.length - 1] + s[0]);
+const TOTAL = STARTS[STARTS.length - 1];
+const sceneAt = T => { let i = 0; while (i < SCENES.length - 1 && T >= STARTS[i + 1]) i++; return i; };
+
+function caption(n, cap, t, D) {
+  const a = win(t, .12, D - .1, .4), off = 14 * (1 - smooth(clamp((t - .12) / .4)));
+  if (a <= 0) return;
+  const [title, eng, desc] = cap;
+  text(`PRINCIPIO ${String(n).padStart(2, '0')}`, 96, 110 + off, RS, 600, 21, col(ACC, a), 'l', 3);
+  text(title, 94, 176 + off, PF, 500, 58, col(WHITE, a));
+  text(eng, 96, 216 + off, RS, 400, 22, col(SKY, a));
+  wrap(desc, fnt(400, 25, AR), 820).forEach((ln, k) => text(ln, 96, 262 + k * 34 + off, AR, 400, 25, col(ONDARK, a)));
+  for (let i = 0; i < 12; i++) {
+    const x = 1540 + i * 28, y = 100;
+    if (i + 1 === n) circle(x, y, 8, ACC); else if (i + 1 < n) circle(x, y, 5, col(SKY, .9)); else ring(x, y, 5, col(ONDARK, .5), 2);
+  }
+}
+function render(T) {
+  const i = sceneAt(T), [D, fn, cap, shk] = SCENES[i], t = T - STARTS[i];
+  ctx.fillStyle = NAVY; ctx.fillRect(0, 0, W, H);
+  const [dx, dy] = shk ? shk(t) : [0, 0];
+  ctx.save(); ctx.translate(dx, dy); ctx.drawImage(BG, -MRG, -MRG);
+  const ca = i > 0 && i < SCENES.length - 1 ? win(t, 0, D, .28) : i === 0 ? clamp((D - t) / .3) : clamp(t / .3);
+  alphaDo(ca, () => fn(t, D));
+  ctx.restore();
+  if (cap) caption(i, cap, t, D);
+  if (T < .4) { ctx.fillStyle = col(NAVY, 1 - T / .4); ctx.fillRect(0, 0, W, H); }
+  if (T > TOTAL - .8) { ctx.fillStyle = col(NAVY, clamp((T - TOTAL + .8) / .8)); ctx.fillRect(0, 0, W, H); }
+}
+
+// ================================================================ reproductor
+const cv = document.getElementById('cv'), stage = document.getElementById('stage'), bigplay = document.getElementById('bigplay');
+const playBtn = document.getElementById('play'), seek = document.getElementById('seek'), timeEl = document.getElementById('time');
+const speedSel = document.getElementById('speed'), chapters = document.getElementById('chapters'), live = document.getElementById('live');
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
+const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3.5v14H7zm6.5 0H17v14h-3.5z"/></svg>';
+const ICON_REPLAY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4.5h4.5"/></svg>';
+const POSTER = 2.4, END_HOLD = TOTAL - .85;
+let T = 0, playing = false, started = false, ended = false, speed = 1, last = 0, scale = 1, curScene = -1;
+ctx = cv.getContext('2d');
+seek.max = TOTAL.toFixed(3);
+
+const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+const chapterList = [['Inicio', 0, 'Inicio'], ...NAMES.map((n, i) => [String(i + 1).padStart(2, '0'), i + 1, n]), ['Resumen', 13, 'Resumen']];
+const chapBtns = chapterList.map(([lab, sc, name]) => {
+  const b = document.createElement('button'); b.textContent = lab; b.title = name; b.setAttribute('aria-label', sc > 0 && sc < 13 ? `Principio ${sc}: ${name}` : name);
+  b.addEventListener('click', () => { T = STARTS[sc] + (sc === 0 ? 0 : .05); started = true; ended = false; if (!playing) setPlaying(true); else draw(); });
+  chapters.appendChild(b); return b;
+});
+chapters.insertAdjacentHTML('beforeend', '<a class="dl" href="12-principios-animacion-baloncesto.mp4" download>Descargar vídeo (MP4)</a>');
+
+function resize() {
+  const sw = stage.clientWidth, sh = stage.clientHeight; if (!sw || !sh) return;
+  const w = Math.min(sw, sh * 16 / 9), h = w * 9 / 16, dpr = Math.min(2, window.devicePixelRatio || 1);
+  cv.style.width = w + 'px'; cv.style.height = h + 'px'; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+  scale = cv.width / W; draw();
+}
+function draw() {
+  if (!BG) return;
+  ctx.setTransform(scale, 0, 0, scale, 0, 0); ctx.globalAlpha = 1;
+  render(started ? T : POSTER);
+  const shown = started ? T : 0;
+  seek.value = shown; timeEl.textContent = `${fmt(shown)} / ${fmt(TOTAL)}`;
+  const sc = started ? sceneAt(T) : -1;
+  if (sc !== curScene) {
+    curScene = sc; chapBtns.forEach((b, i) => b.setAttribute('aria-current', String(i === sc)));
+    if (sc >= 0) { const cap = SCENES[sc][2]; live.textContent = cap ? `Principio ${sc}: ${cap[0]}. ${cap[2]}` : sc === 0 ? 'Los 12 principios de la animación' : 'Resumen de los 12 principios: ' + NAMES.join(', ') + '.'; }
+    if (sc >= 0) chapBtns[sc].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+}
+function setPlaying(p) {
+  if (p && ended) { T = 0; ended = false; }
+  if (p) started = true;
+  playing = p; last = performance.now();
+  playBtn.innerHTML = p ? ICON_PAUSE : ICON_PLAY; playBtn.setAttribute('aria-label', p ? 'Pausa' : 'Reproducir');
+  bigplay.hidden = p || (started && !ended);
+  bigplay.innerHTML = ended ? ICON_REPLAY : ICON_PLAY; bigplay.setAttribute('aria-label', ended ? 'Volver a reproducir' : 'Reproducir animación');
+  draw(); if (p) requestAnimationFrame(tick);
+}
+function tick(now) {
+  if (!playing) return;
+  T += Math.min(.1, (now - last) / 1000) * speed; last = now;
+  if (T >= TOTAL) { T = END_HOLD; ended = true; setPlaying(false); return; }
+  draw(); requestAnimationFrame(tick);
+}
+function step(n) { if (playing) setPlaying(false); started = true; ended = false; T = clamp(Math.round(T * FPS + n) / FPS, 0, TOTAL - 1 / FPS); bigplay.hidden = true; draw(); }
+
+playBtn.addEventListener('click', () => setPlaying(!playing));
+bigplay.addEventListener('click', () => setPlaying(true));
+cv.addEventListener('click', () => setPlaying(!playing));
+document.getElementById('prev').addEventListener('click', () => step(-1));
+document.getElementById('next').addEventListener('click', () => step(1));
+seek.addEventListener('input', () => { started = true; ended = false; T = clamp(+seek.value, 0, TOTAL - .001); bigplay.hidden = true; draw(); });
+speedSel.addEventListener('change', () => { speed = +speedSel.value; });
+document.getElementById('fs').addEventListener('click', () => {
+  const el = document.getElementById('player');
+  if (document.fullscreenElement) document.exitFullscreen(); else if (el.requestFullscreen) el.requestFullscreen(); else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+});
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || (e.target.tagName === 'INPUT' && e.key !== ' ')) return;
+  if (e.key === ' ' || e.key === 'k') { e.preventDefault(); setPlaying(!playing); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+  else if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+});
+new ResizeObserver(resize).observe(stage);
+
+const fontsReady = Promise.all([`500 40px "${PF}"`, `400 40px "${PF}"`, `700 40px "${PF}"`, `400 20px "${RS}"`, `600 20px "${RS}"`, `700 20px "${RS}"`, `400 20px "${AR}"`].map(f => document.fonts.load(f)));
+Promise.race([fontsReady, new Promise(r => setTimeout(r, 2500))]).then(() => { BG = makeBG(); playBtn.innerHTML = ICON_PLAY; resize(); });
+</script>
+</body>
+</html>
