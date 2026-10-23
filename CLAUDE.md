@@ -20,6 +20,8 @@ multimedia/      recursos didácticos interactivos (animaciones, reproductores�
 - Commits en español; la usuaria trabaja en Windows (recargar con Ctrl+F5).
 
 ## Comunicaciones
+**`comunicaciones/gemini-alumnos/` está duplicada en `INNAPUFV/formacion-ia`** (mismo contenido, publicado en las dos direcciones): cualquier cambio se aplica en ambos repositorios.
+
 Cada comunicación en su subcarpeta:
 - `index.html` → anuncio de Canvas por iframe (sin logo ni pie, `ufv.css`, `ENLACES`, no indexable).
 - `tablero.html` (opcional) → banner compacto para el tablero: ocupa el 100 % del alto del iframe y cabe en 280 px de 320 a 1000 px de ancho.
