@@ -112,6 +112,8 @@ a.practica:hover{border-color:var(--ink); border-top-color:var(--ink)}
 .foto{flex:none; width:96px; height:116px; background:var(--stone); color:var(--yellow); display:grid; place-items:center; overflow:hidden;
   font:400 34px/1 var(--f-display); letter-spacing:.02em}
 .foto img{width:100%; height:100%; object-fit:cover}
+.foto .perfil{width:46px; height:46px; stroke:var(--yellow); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+.foto img + .perfil{display:none}
 .profe .txt{display:flex; flex-direction:column; gap:6px; min-height:116px; min-width:0}
 .profe .nombre{margin:0; font-family:var(--f-label); font-weight:850; font-size:15px; letter-spacing:.02em}
 
@@ -221,11 +223,11 @@ a:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
   <!-- ===== Profesor y ejercicios ===== -->
   <div class="grid g2">
     <a class="bloque profe" data-enlace="profesor">
-      <span class="foto" aria-hidden="true"><img src="profesor.jpg" alt="" onerror="this.remove()">JR</span>
+      <span class="foto" aria-hidden="true"><img src="profesor.jpg" alt="" onerror="this.remove()"><svg class="perfil" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c.8-4 3.8-6.5 7.5-6.5s6.7 2.5 7.5 6.5"/></svg></span>
       <div class="txt">
         <h2>¿Quién es tu profesor?</h2>
         <p class="nombre">Javier de la Rosa</p>
-        <span class="ir">Conócelo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="ir">Ver perfil en LinkedIn <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
     </a>
     <a class="bloque" data-enlace="ejercicios">
@@ -276,7 +278,7 @@ const ENLACES = {
   "jugando":    "",   // Aprende jugando
   "unidades":   "",   // Unidades temáticas
   "cuadernos":  "",   // Cuadernos de la asignatura (NotebookLM)
-  "profesor":   "",   // ¿Quién es tu profesor?
+  "profesor":   "",   // ¿Quién es tu profesor? → perfil de LinkedIn de Javier de la Rosa
   "ejercicios": "",   // Ejercicios y videolecciones
   "tutoria":    "",   // Gestor de citas de tutoría
   "practicaIA": "",   // Practica con IA (Gemini)
