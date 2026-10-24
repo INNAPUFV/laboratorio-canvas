@@ -8,6 +8,7 @@ Publicación: GitHub Pages → `https://innapufv.github.io/laboratorio-canvas/<c
 ## Estructura
 ```
 assets/          ufv.css (copia propia, independiente de formacion-ia) + contacto.jpg
+portada/         portada HTML del curso (página de inicio de Canvas)
 comunicaciones/  anuncios, banners de tablero y correos
 multimedia/      recursos didácticos interactivos (animaciones, reproductores…)
 ```
@@ -37,3 +38,12 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | Carpeta | Pieza | iframe |
 |---|---|---|
 | `multimedia/principios-animacion/` | Los 12 principios de la animación con una pelota de baloncesto: reproductor en canvas JS (capítulos, fotograma a fotograma, 0,25×) + MP4 descargable | 600 |
+
+## Portada del curso
+`portada/index.html` → página de inicio del curso de Canvas **Narrativa Periodística**. **No usa el estilo UFV**: sigue la identidad de los anuncios y de PlumIA (proyecto → `claude/Identidad visual (anuncios y PlumIA).md`): amarillo `#FDDA48`, negro `#0F1010`, gris carbón `#393836`; Anton / Garet (Montserrat de reserva) / Open Sans. No usa `ufv.css`.
+- Enlaces en el bloque `ENLACES` (todos en pestaña nueva, `noopener noreferrer`); vacío = «Próximamente».
+- Foto del profesor: `portada/profesor.jpg` (si no existe, se ven las iniciales).
+
+| Carpeta | Pieza | iframe |
+|---|---|---|
+| `portada/` | Portada del curso Narrativa Periodística | 1360 |

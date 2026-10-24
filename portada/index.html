@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- No indexar en buscadores -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Narrativa Periodística · Portada del curso</title>
+
+<!--
+  PORTADA DEL CURSO DE CANVAS · NARRATIVA PERIODÍSTICA
+  Identidad: «Identidad visual (anuncios y PlumIA)».
+  CÓMO EDITARLA
+  1) ENLACES de cada bloque: en el bloque «const ENLACES» al final.
+     Si un enlace está vacío, el bloque muestra «Próximamente» y no navega.
+  2) INSIGNIA de la cabecera: busca «INSIGNIA».
+  3) FOTO del profesor: sube la imagen a esta carpeta como «profesor.jpg».
+     Si no existe, se ven las iniciales.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@800;900&family=Open+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/garet">
+
+<style>
+:root{
+  --yellow:#FDDA48;
+  --ink:#0F1010;
+  --stone:#393836;
+  --stone-2:#2B2A28;
+  --paper:#FFFFFF;
+  --muted:#676762;
+  --line:#D9D9D3;
+  --card:#F4F4F0;
+  --practice:#FAFAF8;
+  --f-display:'Anton', Impact, sans-serif;
+  --f-label:'Garet', 'Montserrat', Arial, sans-serif;
+  --f-body:'Open Sans', Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%; display:block}
+.wrap{max-width:1080px; margin:0 auto; padding:22px clamp(14px,4vw,36px) 34px}
+
+/* ---------- Rótulos ---------- */
+.label{font-family:var(--f-label); font-weight:850; text-transform:uppercase; letter-spacing:.14em; font-size:11.5px; line-height:1.3}
+
+/* ---------- Cabecera ---------- */
+.topline{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:12px; border-bottom:2px solid var(--ink)}
+.topline .label{color:var(--ink)}
+.insignia{background:var(--yellow); color:var(--ink); padding:6px 12px; white-space:nowrap}
+
+.hero{position:relative; overflow:hidden; background:var(--yellow); margin-top:16px; padding:clamp(24px,4.5vw,44px) clamp(22px,4.5vw,44px)}
+.hero .label{margin:0 0 10px}
+.hero h1{position:relative; margin:0; font:400 clamp(38px,6.6vw,72px)/1.02 var(--f-display); letter-spacing:.004em; text-transform:uppercase; max-width:12ch}
+.hero .firma{display:inline-flex; align-items:center; gap:10px; margin:0 0 14px}
+.hero .firma::before{content:""; width:28px; height:2px; background:var(--ink)}
+.hero .marca{position:absolute; right:clamp(14px,4vw,40px); bottom:-.18em; font:400 clamp(120px,20vw,220px)/1 var(--f-display);
+  color:rgba(15,16,16,.06); pointer-events:none; user-select:none}
+
+/* ---------- Bloques ---------- */
+.grid{display:grid; gap:16px; margin-top:16px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+
+.bloque{position:relative; display:flex; flex-direction:column; gap:6px; text-decoration:none; color:var(--ink);
+  background:var(--paper); border:1px solid var(--line); border-top:5px solid var(--yellow); padding:20px 22px 18px;
+  transition:border-color .18s, background .18s}
+.bloque h2,.bloque h3{margin:0; font:400 clamp(22px,2.6vw,27px)/1.1 var(--f-display); text-transform:uppercase; letter-spacing:.01em}
+.bloque .sub{margin:0; color:var(--muted); font-size:15px; line-height:1.5}
+.ico{width:42px; height:42px; display:grid; place-items:center; background:var(--yellow); margin-bottom:8px; flex:none}
+.ico svg{width:22px; height:22px; stroke:var(--ink); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+.ir{margin-top:auto; padding-top:10px; display:inline-flex; align-items:center; gap:8px; font-family:var(--f-label); font-weight:850;
+  font-size:11.5px; letter-spacing:.14em; text-transform:uppercase}
+.ir svg{width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .18s}
+a.bloque:hover{border-color:var(--ink); border-top-color:var(--yellow)}
+a.bloque:hover .ir svg{transform:translateX(3px)}
+
+/* Bloque oscuro (gris carbón) */
+.bloque.oscuro{background:var(--stone); color:#fff; border-color:var(--stone); border-top-color:var(--yellow)}
+.bloque.oscuro .sub{color:#E7E6E1}
+.bloque.oscuro .ir{color:var(--yellow)}
+a.bloque.oscuro:hover{background:var(--stone-2); border-color:var(--stone-2); border-top-color:var(--yellow)}
+.tag{align-self:flex-start; background:var(--yellow); color:var(--ink); padding:4px 9px; margin-bottom:6px}
+
+/* Banner ancho: Unidades temáticas */
+.banner{display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:20px 28px; flex-wrap:wrap; padding:26px 28px}
+.banner h2{font-size:clamp(30px,4.4vw,46px); line-height:1}
+.banner .lema{margin:8px 0 0; font-family:var(--f-label); font-weight:850; font-size:clamp(14px,1.6vw,17px); letter-spacing:.08em; text-transform:uppercase; color:var(--yellow)}
+.boton{display:inline-flex; align-items:center; gap:9px; padding:12px 20px; background:var(--yellow); color:var(--ink);
+  font-family:var(--f-label); font-weight:850; font-size:12px; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap}
+.boton svg{width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .18s}
+a.bloque:hover .boton svg{transform:translateX(3px)}
+
+/* Bloque práctico: Cuadernos */
+.practica{display:flex; flex-direction:row; align-items:stretch; gap:0; padding:0; background:var(--practice); border-top:1px solid var(--line)}
+.practica .banda{flex:none; width:74px; background:var(--ink); display:grid; place-items:center}
+.practica .banda svg{width:30px; height:30px; stroke:var(--yellow); fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
+.practica .cuerpo{flex:1; min-width:0; display:flex; align-items:center; justify-content:space-between; gap:14px 24px; flex-wrap:wrap; padding:20px 24px}
+.practica .ir{margin:0; padding:0}
+a.practica:hover{border-color:var(--ink); border-top-color:var(--ink)}
+
+/* Profesor */
+.profe{flex-direction:row; align-items:flex-start; gap:18px; background:var(--card); border-top-color:var(--yellow)}
+.foto{flex:none; width:96px; height:116px; background:var(--stone); color:var(--yellow); display:grid; place-items:center; overflow:hidden;
+  font:400 34px/1 var(--f-display); letter-spacing:.02em}
+.foto img{width:100%; height:100%; object-fit:cover}
+.profe .txt{display:flex; flex-direction:column; gap:6px; min-height:116px; min-width:0}
+.profe .nombre{margin:0; font-family:var(--f-label); font-weight:850; font-size:15px; letter-spacing:.02em}
+
+/* Tutoría */
+.tutoria{display:flex; align-items:center; gap:18px; margin-top:16px; padding:18px 22px; border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);
+  text-decoration:none; color:var(--ink)}
+.tutoria .ico{margin:0}
+.tutoria p{flex:1; margin:0; font-size:clamp(16px,1.9vw,19px); line-height:1.45; font-weight:600}
+.tutoria .boton{background:var(--stone); color:#fff}
+a.tutoria:hover .boton{background:var(--stone-2)}
+a.tutoria:hover .boton svg{transform:translateX(3px)}
+
+/* Pendientes */
+.pendiente{cursor:default}
+.pendiente .ir{opacity:.55}
+.pendiente .boton, a.tutoria.pendiente .boton{background:transparent; color:inherit; box-shadow:inset 0 0 0 1px currentColor; opacity:.6}
+
+/* Pie */
+footer{margin-top:24px; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--muted)}
+footer .label{font-size:10.5px}
+
+/* Foco y movimiento */
+a:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
+.oscuro:focus-visible{outline-color:var(--yellow)}
+@media (prefers-reduced-motion:reduce){ *{transition:none !important} }
+
+/* ---------- Móvil ---------- */
+@media (max-width:760px){
+  .g3{grid-template-columns:1fr 1fr}
+  .g3 > :last-child{grid-column:1 / -1}
+}
+@media (max-width:650px){
+  .wrap{padding:12px 10px 25px}
+  .hero{padding:28px 21px}
+  .g3,.g2{grid-template-columns:1fr}
+  .tutoria{flex-wrap:wrap}
+  .tutoria .boton{width:100%; justify-content:center}
+  .practica .banda{width:56px}
+  .banner{padding:22px 21px}
+}
+@media (max-width:420px){
+  .profe{flex-direction:column}
+  .profe .txt{min-height:0}
+  .topline{flex-wrap:wrap; gap:8px 16px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ===== Cabecera ===== -->
+  <header class="topline">
+    <span class="label">Universidad Francisco de Vitoria</span>
+    <!-- INSIGNIA: cambia el texto entre las etiquetas -->
+    <span class="label insignia">Curso 2026-2027</span>
+  </header>
+
+  <section class="hero" aria-labelledby="titulo">
+    <p class="label firma">Javier de la Rosa</p>
+    <h1 id="titulo">Narrativa Periodística</h1>
+    <span class="marca" aria-hidden="true">NP</span>
+  </section>
+
+  <!-- ===== Tres accesos ===== -->
+  <nav class="grid g3" aria-label="Organización del curso">
+    <a class="bloque" data-enlace="plan">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5"/><path d="M3.5 10h17M8 3v4M16 3v4M7.5 14h3M13.5 14h3M7.5 17h3"/></svg></span>
+      <h2>Plan de trabajo</h2>
+      <span class="ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="bloque" data-enlace="programa">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 15.5h7M9 9h3"/></svg></span>
+      <h2>Programa y guía docente</h2>
+      <span class="ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="bloque" data-enlace="jugando">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 8h10a4 4 0 014 4v1a4 4 0 01-7 2.6h-4A4 4 0 013 13v-1a4 4 0 014-4z"/><path d="M8 10.5v3M6.5 12h3"/><path d="M15.5 11h.01M17.5 13h.01"/></svg></span>
+      <h2>Aprende jugando</h2>
+      <p class="sub">En la mejor plataforma</p>
+      <span class="ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </nav>
+
+  <!-- ===== Unidades temáticas ===== -->
+  <div class="grid">
+    <a class="bloque oscuro banner" data-enlace="unidades">
+      <div>
+        <h2>Unidades temáticas</h2>
+        <p class="lema">Estudia. Practica. Aprende.</p>
+      </div>
+      <span class="boton">Ir a las unidades <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+
+  <!-- ===== Cuadernos ===== -->
+    <a class="bloque practica" data-enlace="cuadernos">
+      <span class="banda" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h11M9 8h6M9 11h4"/></svg></span>
+      <div class="cuerpo">
+        <div>
+          <h2>Cuadernos de la asignatura</h2>
+          <p class="sub">NotebookLM</p>
+        </div>
+        <span class="ir">Abrir los cuadernos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </a>
+  </div>
+
+  <!-- ===== Profesor y ejercicios ===== -->
+  <div class="grid g2">
+    <a class="bloque profe" data-enlace="profesor">
+      <span class="foto" aria-hidden="true"><img src="profesor.jpg" alt="" onerror="this.remove()">JR</span>
+      <div class="txt">
+        <h2>¿Quién es tu profesor?</h2>
+        <p class="nombre">Javier de la Rosa</p>
+        <span class="ir">Conócelo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </a>
+    <a class="bloque" data-enlace="ejercicios">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="13"/><path d="M10 9l5 2.5-5 2.5z"/><path d="M8 21h8"/></svg></span>
+      <h2>Ejercicios y videolecciones</h2>
+      <p class="sub">Mira, practica y aprende</p>
+      <span class="ir">Entrar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </div>
+
+  <!-- ===== Tutoría ===== -->
+  <a class="tutoria" data-enlace="tutoria">
+    <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M9 15l2 2 4-4"/></svg></span>
+    <p>Solicita tutoría presencial u online a través del gestor de citas.</p>
+    <span class="boton">Pedir cita <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </a>
+
+  <!-- ===== IA ===== -->
+  <div class="grid g2">
+    <a class="bloque oscuro" data-enlace="practicaIA">
+      <span class="label tag">Gemini</span>
+      <h2>Practica con IA</h2>
+      <p class="sub">Ejercicios ilimitados</p>
+      <span class="ir">Empezar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="bloque oscuro" data-enlace="acnbot">
+      <span class="label tag">Gemini</span>
+      <h2>ACN BOT</h2>
+      <p class="sub">Tu tutor de la asignatura</p>
+      <span class="ir">Preguntar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </div>
+
+  <footer>
+    <span class="label">Narrativa Periodística</span>
+    <span class="label">Universidad Francisco de Vitoria</span>
+  </footer>
+</main>
+
+<script>
+/* ENLACES
+   Pega entre comillas la dirección de cada bloque.
+   Todos se abren en una pestaña nueva para salir del iframe.
+   Si un enlace está vacío, el bloque muestra «Próximamente» y no navega. */
+const ENLACES = {
+  "plan":       "",   // Plan de trabajo
+  "programa":   "",   // Programa y guía docente
+  "jugando":    "",   // Aprende jugando
+  "unidades":   "",   // Unidades temáticas
+  "cuadernos":  "",   // Cuadernos de la asignatura (NotebookLM)
+  "profesor":   "",   // ¿Quién es tu profesor?
+  "ejercicios": "",   // Ejercicios y videolecciones
+  "tutoria":    "",   // Gestor de citas de tutoría
+  "practicaIA": "",   // Practica con IA (Gemini)
+  "acnbot":     ""    // ACN BOT (Gemini)
+};
+document.querySelectorAll('[data-enlace]').forEach(a => {
+  const url = (ENLACES[a.dataset.enlace] || "").trim();
+  if (url) {
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+  } else {
+    a.classList.add('pendiente');
+    a.setAttribute('aria-disabled', 'true');
+    const accion = a.querySelector('.ir, .boton');
+    if (accion) accion.innerHTML = 'Próximamente';
+  }
+});
+</script>
+</body>
+</html>
