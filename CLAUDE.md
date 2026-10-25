@@ -43,17 +43,18 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 
 ## Portada del curso
 `portada/index.html` → página de inicio del curso de Canvas **Narrativa Periodística I** (con la «I»). **No usa el estilo UFV**: sigue la identidad de marca de la asignatura (proyecto → `claude/Identidad visual de marca (guía unificada).md`): amarillo `#FDDA48`, negro `#0F1010`, gris carbón `#393836`; **Anton** (titulares) / **Cooper Hewitt Heavy** (rótulos y encabezados; sustituye a Garet desde el 25/10/2026) / **Open Sans** (texto). No usa `ufv.css`.
-- Cooper Hewitt no está en Google Fonts: alojar los `woff2` en `assets/fonts/` y declararlos con `@font-face` (reserva: Open Sans 800). **Pendiente de aplicar en el código**: la portada todavía carga Garet (Montserrat de reserva).
+- Cooper Hewitt Heavy se carga desde `../assets/fonts/` con `@font-face` (reserva: Open Sans 800). Ya aplicada (25/10/2026).
+- **Orden por necesidad del alumno, en cuatro secciones con rótulo numerado** (`h2.seccion`; las tarjetas son `h3`): 01 Empieza aquí (Plan de trabajo · Guía docente · ¿Quién es tu profesor?) · 02 Estudia (Unidades temáticas · Cuadernos) · 03 Practica (Ejercicios y videolecciones · Aprende jugando · PlumIA) · 04 Resuelve tus dudas (ACN BOT · Tutoría con el profesor) + aviso de IA.
 - Logos de terceros siempre en una sola tinta (blanco sobre carbón o negro, negro sobre claro).
 - Enlaces en el bloque `ENLACES` (todos en pestaña nueva, `noopener noreferrer`); vacío = «Próximamente».
 - Logos (Gemini, Gemini Notebook): SVG en una tinta, vectorizados de los originales e incrustados en el propio HTML como `<symbol>` al principio del `<body>`; toman el color del texto (`currentColor`). Ojo: **NotebookLM ahora se llama Gemini Notebook**.
 - **PlumIA** (antes «Practica con IA»): logotipo oficial copiado de `INNAPUFV/plumia` (SVG de la P plumilla + «lum» e «IA» en Anton), centrado; subtítulo «Tu copiloto de redacción». Enlace en `ENLACES.plumia`.
-- Se usa como **página de inicio** de Canvas, donde la columna lateral derecha estrecha el contenido (≈600–700 px): las tres primeras tarjetas y las parejas siguen en fila hasta 520 px. Altura del iframe calculada para que no se corte entre 540 y 1300 px de ancho (máx. medido 1446 a 540 px; 1402 a ≥1100 px).
-- Foto del profesor: JPG cuadrado 240×240 incrustado en base64 en el HTML (busca «FOTO del profesor»). Las tarjetas del profesor y de Ejercicios y videolecciones comparten diseño (`.lateral`: cuadro de 96 px a la izquierda —foto o icono amarillo— y texto a la derecha). El bloque del profesor enlaza a la página de Canvas «Profesor y enfoque de la asignatura».
+- Se usa como **página de inicio** de Canvas, donde la columna lateral derecha estrecha el contenido (≈600–700 px): las filas de tres y de dos tarjetas siguen en fila hasta 520 px. Altura medida: 1505–1681 px entre 540 y 1300 px de ancho → iframe 1720. Sin `scrolling="no"`, para que en el móvil (≈2560 px de alto) se pueda desplazar dentro.
+- Foto del profesor: JPG cuadrado 240×240 incrustado en base64 en el HTML (busca «FOTO del profesor»), en el cuadro que en las demás tarjetas ocupa el icono amarillo. El bloque del profesor enlaza a la página de Canvas «Profesor y enfoque de la asignatura».
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `portada/` | Portada del curso Narrativa Periodística I | 1500 |
+| `portada/` | Portada del curso Narrativa Periodística I | 1720 |
 
 ## Plan de trabajo
 `plan-trabajo/index.html` → plan de trabajo interactivo 2026–2027 (página de Canvas «Plan de trabajo interactivo»). Titular H1: «Plan de trabajo»; la asignatura va en la entradilla. Misma identidad de marca que la portada, ya con **Cooper Hewitt Heavy** desde `../assets/fonts/` (reserva Open Sans 800).
