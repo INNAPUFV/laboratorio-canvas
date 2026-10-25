@@ -40,7 +40,9 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | `multimedia/principios-animacion/` | Los 12 principios de la animación con una pelota de baloncesto: reproductor en canvas JS (capítulos, fotograma a fotograma, 0,25×) + MP4 descargable | 600 |
 
 ## Portada del curso
-`portada/index.html` → página de inicio del curso de Canvas **Narrativa Periodística**. **No usa el estilo UFV**: sigue la identidad de los anuncios y de PlumIA (proyecto → `claude/Identidad visual (anuncios y PlumIA).md`): amarillo `#FDDA48`, negro `#0F1010`, gris carbón `#393836`; Anton / Garet (Montserrat de reserva) / Open Sans. No usa `ufv.css`.
+`portada/index.html` → página de inicio del curso de Canvas **Narrativa Periodística**. **No usa el estilo UFV**: sigue la identidad de marca de la asignatura (proyecto → `claude/Identidad visual de marca (guía unificada).md`): amarillo `#FDDA48`, negro `#0F1010`, gris carbón `#393836`; **Anton** (titulares) / **Cooper Hewitt Heavy** (rótulos y encabezados; sustituye a Garet desde el 25/10/2026) / **Open Sans** (texto). No usa `ufv.css`.
+- Cooper Hewitt no está en Google Fonts: alojar los `woff2` en `assets/fonts/` y declararlos con `@font-face` (reserva: Open Sans 800). **Pendiente de aplicar en el código**: la portada todavía carga Garet (Montserrat de reserva).
+- Logos de terceros siempre en una sola tinta (blanco sobre carbón o negro, negro sobre claro).
 - Enlaces en el bloque `ENLACES` (todos en pestaña nueva, `noopener noreferrer`); vacío = «Próximamente».
 - Logos (Gemini, Gemini Notebook, LinkedIn): SVG en una tinta, vectorizados de los originales e incrustados en el propio HTML como `<symbol>` al principio del `<body>`; toman el color del texto (`currentColor`). Ojo: **NotebookLM ahora se llama Gemini Notebook**.
 - **PlumIA** (antes «Practica con IA»): logotipo oficial copiado de `INNAPUFV/plumia` (SVG de la P plumilla + «lum» e «IA» en Anton), centrado; subtítulo «Tu copiloto de redacción». Enlace en `ENLACES.plumia`.
