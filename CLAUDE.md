@@ -46,10 +46,10 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 - Cooper Hewitt no está en Google Fonts: alojar los `woff2` en `assets/fonts/` y declararlos con `@font-face` (reserva: Open Sans 800). **Pendiente de aplicar en el código**: la portada todavía carga Garet (Montserrat de reserva).
 - Logos de terceros siempre en una sola tinta (blanco sobre carbón o negro, negro sobre claro).
 - Enlaces en el bloque `ENLACES` (todos en pestaña nueva, `noopener noreferrer`); vacío = «Próximamente».
-- Logos (Gemini, Gemini Notebook, LinkedIn): SVG en una tinta, vectorizados de los originales e incrustados en el propio HTML como `<symbol>` al principio del `<body>`; toman el color del texto (`currentColor`). Ojo: **NotebookLM ahora se llama Gemini Notebook**.
+- Logos (Gemini, Gemini Notebook): SVG en una tinta, vectorizados de los originales e incrustados en el propio HTML como `<symbol>` al principio del `<body>`; toman el color del texto (`currentColor`). Ojo: **NotebookLM ahora se llama Gemini Notebook**.
 - **PlumIA** (antes «Practica con IA»): logotipo oficial copiado de `INNAPUFV/plumia` (SVG de la P plumilla + «lum» e «IA» en Anton), centrado; subtítulo «Tu copiloto de redacción». Enlace en `ENLACES.plumia`.
-- Se usa como **página de inicio** de Canvas, donde la columna lateral derecha estrecha el contenido (≈600–700 px): las tres primeras tarjetas y las parejas siguen en fila hasta 520 px. Altura del iframe calculada para que no se corte entre 540 y 1300 px de ancho (máx. medido 1480 a 540 px; 1455 a ≥1100 px).
-- Foto del profesor: `portada/profesor.jpg` (si no existe, se ve el logo de LinkedIn en blanco). El bloque del profesor enlaza a la página de Canvas «Profesor y enfoque de la asignatura».
+- Se usa como **página de inicio** de Canvas, donde la columna lateral derecha estrecha el contenido (≈600–700 px): las tres primeras tarjetas y las parejas siguen en fila hasta 520 px. Altura del iframe calculada para que no se corte entre 540 y 1300 px de ancho (máx. medido 1446 a 540 px; 1402 a ≥1100 px).
+- Foto del profesor: JPG cuadrado 240×240 incrustado en base64 en el HTML (busca «FOTO del profesor»). Las tarjetas del profesor y de Ejercicios y videolecciones comparten diseño (`.lateral`: cuadro de 96 px a la izquierda —foto o icono amarillo— y texto a la derecha). El bloque del profesor enlaza a la página de Canvas «Profesor y enfoque de la asignatura».
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
