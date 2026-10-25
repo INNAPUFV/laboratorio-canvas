@@ -48,11 +48,12 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 - Enlaces en el bloque `ENLACES` (todos en pestaña nueva, `noopener noreferrer`); vacío = «Próximamente».
 - Logos (Gemini, Gemini Notebook, LinkedIn): SVG en una tinta, vectorizados de los originales e incrustados en el propio HTML como `<symbol>` al principio del `<body>`; toman el color del texto (`currentColor`). Ojo: **NotebookLM ahora se llama Gemini Notebook**.
 - **PlumIA** (antes «Practica con IA»): logotipo oficial copiado de `INNAPUFV/plumia` (SVG de la P plumilla + «lum» e «IA» en Anton), centrado; subtítulo «Tu copiloto de redacción». Enlace en `ENLACES.plumia`.
+- Se usa como **página de inicio** de Canvas, donde la columna lateral derecha estrecha el contenido (≈600–700 px): las tres primeras tarjetas y las parejas siguen en fila hasta 520 px. Altura del iframe calculada para que no se corte entre 540 y 1300 px de ancho (máx. medido 1480 a 540 px; 1455 a ≥1100 px).
 - Foto del profesor: `portada/profesor.jpg` (si no existe, se ve el logo de LinkedIn en blanco). El bloque del profesor enlaza a la página de Canvas «Profesor y enfoque de la asignatura».
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `portada/` | Portada del curso Narrativa Periodística I | 1400 |
+| `portada/` | Portada del curso Narrativa Periodística I | 1500 |
 
 ## Plan de trabajo
 `plan-trabajo/index.html` → plan de trabajo interactivo 2026–2027 (página de Canvas «Plan de trabajo interactivo»). Titular H1: «Plan de trabajo»; la asignatura va en la entradilla. Misma identidad de marca que la portada, ya con **Cooper Hewitt Heavy** desde `../assets/fonts/` (reserva Open Sans 800).

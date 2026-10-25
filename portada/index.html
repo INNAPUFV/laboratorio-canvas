@@ -148,19 +148,31 @@ a:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
 .oscuro:focus-visible{outline-color:var(--yellow)}
 @media (prefers-reduced-motion:reduce){ *{transition:none !important} }
 
-/* ---------- Móvil ---------- */
+/* ---------- Anchos estrechos ----------
+   Las tres primeras tarjetas y las parejas se mantienen en fila hasta 520 px,
+   para que la portada se vea igual como página de inicio de Canvas (con la
+   columna lateral derecha) que como página interior. */
 @media (max-width:760px){
-  .g3{grid-template-columns:1fr 1fr}
-  .g3 > :last-child{grid-column:1 / -1}
+  .g3 .bloque{padding:16px 16px 14px}
+  .g3 .bloque h2{font-size:21px}
+  .g3 .ico{width:36px; height:36px; margin-bottom:6px}
+  .g3 .ico svg{width:19px; height:19px}
+  .g3 .bloque .sub{font-size:14px}
+  .g2 .bloque{padding:18px 18px 16px}
+  .profe{gap:14px}
+  .foto{width:78px; height:96px}
+  .profe .txt{min-height:96px}
 }
 @media (max-width:650px){
   .wrap{padding:12px 10px 25px}
   .hero{padding:28px 21px}
+  .practica .banda{width:56px}
+  .banner{padding:22px 21px}
+}
+@media (max-width:520px){
   .g3,.g2{grid-template-columns:1fr}
   .tutoria{flex-wrap:wrap}
   .tutoria .boton{width:100%; justify-content:center}
-  .practica .banda{width:56px}
-  .banner{padding:22px 21px}
 }
 @media (max-width:420px){
   .profe{flex-direction:column}
