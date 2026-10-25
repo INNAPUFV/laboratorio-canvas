@@ -43,6 +43,7 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 `portada/index.html` → página de inicio del curso de Canvas **Narrativa Periodística**. **No usa el estilo UFV**: sigue la identidad de los anuncios y de PlumIA (proyecto → `claude/Identidad visual (anuncios y PlumIA).md`): amarillo `#FDDA48`, negro `#0F1010`, gris carbón `#393836`; Anton / Garet (Montserrat de reserva) / Open Sans. No usa `ufv.css`.
 - Enlaces en el bloque `ENLACES` (todos en pestaña nueva, `noopener noreferrer`); vacío = «Próximamente».
 - Logos (Gemini, Gemini Notebook, LinkedIn): SVG en una tinta, vectorizados de los originales e incrustados en el propio HTML como `<symbol>` al principio del `<body>`; toman el color del texto (`currentColor`). Ojo: **NotebookLM ahora se llama Gemini Notebook**.
+- **PlumIA** (antes «Practica con IA»): logotipo oficial copiado de `INNAPUFV/plumia` (SVG de la P plumilla + «lum» e «IA» en Anton), centrado; subtítulo «Tu copiloto de redacción». Enlace en `ENLACES.plumia`.
 - Foto del profesor: `portada/profesor.jpg` (si no existe, se ve el logo de LinkedIn en blanco). El bloque del profesor enlaza a su perfil de LinkedIn.
 
 | Carpeta | Pieza | iframe |

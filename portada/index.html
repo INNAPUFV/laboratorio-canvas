@@ -107,6 +107,13 @@ a.bloque:hover .boton svg{transform:translateX(3px)}
 .practica .ir{margin:0; padding:0}
 a.practica:hover{border-color:var(--ink); border-top-color:var(--ink)}
 
+/* PlumIA: logotipo oficial (P plumilla en amarillo, «lum» en blanco, «IA» en amarillo), centrado */
+.plumia{align-items:center; justify-content:center; text-align:center}
+.plumia .plumia-logo{font:400 clamp(46px,6vw,60px)/1 var(--f-display); letter-spacing:.01em; color:#fff; white-space:nowrap; text-transform:none; margin:auto 0 4px}
+.plumia .plumia-logo em{font-style:normal; color:var(--yellow)}
+.plumia .p-nib{height:1.08em; width:auto; vertical-align:-.22em; margin-right:.03em; fill:var(--yellow)}
+.plumia .ir{margin-top:auto}
+
 /* Profesor */
 .profe{flex-direction:row; align-items:flex-start; gap:18px; background:var(--card); border-top-color:var(--yellow)}
 .foto{flex:none; width:96px; height:116px; background:var(--stone); color:var(--yellow); display:grid; place-items:center; overflow:hidden;
@@ -253,10 +260,9 @@ a:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
 
   <!-- ===== IA ===== -->
   <div class="grid g2">
-    <a class="bloque oscuro" data-enlace="practicaIA">
-      <svg class="marca-gemini" role="img" aria-label="Gemini"><use href="#logo-gemini"/></svg>
-      <h2>Practica con IA</h2>
-      <p class="sub">Ejercicios ilimitados</p>
+    <a class="bloque oscuro plumia" data-enlace="plumia">
+      <h2 class="plumia-logo" aria-label="PlumIA"><svg class="p-nib" viewBox="0 0 46 108" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M2 0H30C41 0 46 8 46 22V25C46 40 40 47 30 47H17V86L9.5 107L2 86Z M31 17.5a6.5 6.5 0 1 0 0.01 0Z M7.4 66H11.6L9.75 107H9.25Z"/></svg><span aria-hidden="true">lum<em>IA</em></span></h2>
+      <p class="sub">Tu copiloto de redacción</p>
       <span class="ir">Empezar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
     <a class="bloque oscuro" data-enlace="acnbot">
@@ -287,7 +293,7 @@ const ENLACES = {
   "profesor":   "",   // ¿Quién es tu profesor? → perfil de LinkedIn de Javier de la Rosa
   "ejercicios": "",   // Ejercicios y videolecciones
   "tutoria":    "",   // Gestor de citas de tutoría
-  "practicaIA": "",   // Practica con IA (Gemini)
+  "plumia":     "",   // PlumIA · Tu copiloto de redacción
   "acnbot":     ""    // ACN BOT (Gemini)
 };
 document.querySelectorAll('[data-enlace]').forEach(a => {
