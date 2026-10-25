@@ -44,7 +44,7 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 - Enlaces en el bloque `ENLACES` (todos en pestaña nueva, `noopener noreferrer`); vacío = «Próximamente».
 - Logos (Gemini, Gemini Notebook, LinkedIn): SVG en una tinta, vectorizados de los originales e incrustados en el propio HTML como `<symbol>` al principio del `<body>`; toman el color del texto (`currentColor`). Ojo: **NotebookLM ahora se llama Gemini Notebook**.
 - **PlumIA** (antes «Practica con IA»): logotipo oficial copiado de `INNAPUFV/plumia` (SVG de la P plumilla + «lum» e «IA» en Anton), centrado; subtítulo «Tu copiloto de redacción». Enlace en `ENLACES.plumia`.
-- Foto del profesor: `portada/profesor.jpg` (si no existe, se ve el logo de LinkedIn en blanco). El bloque del profesor enlaza a su perfil de LinkedIn.
+- Foto del profesor: `portada/profesor.jpg` (si no existe, se ve el logo de LinkedIn en blanco). El bloque del profesor enlaza a la página de Canvas «Profesor y enfoque de la asignatura».
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
