@@ -42,7 +42,7 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | `multimedia/principios-animacion/` | Los 12 principios de la animación con una pelota de baloncesto: reproductor en canvas JS (capítulos, fotograma a fotograma, 0,25×) + MP4 descargable | 600 |
 
 ## Portada del curso
-`portada/index.html` → página de inicio del curso de Canvas **Narrativa Periodística**. **No usa el estilo UFV**: sigue la identidad de marca de la asignatura (proyecto → `claude/Identidad visual de marca (guía unificada).md`): amarillo `#FDDA48`, negro `#0F1010`, gris carbón `#393836`; **Anton** (titulares) / **Cooper Hewitt Heavy** (rótulos y encabezados; sustituye a Garet desde el 25/10/2026) / **Open Sans** (texto). No usa `ufv.css`.
+`portada/index.html` → página de inicio del curso de Canvas **Narrativa Periodística I** (con la «I»). **No usa el estilo UFV**: sigue la identidad de marca de la asignatura (proyecto → `claude/Identidad visual de marca (guía unificada).md`): amarillo `#FDDA48`, negro `#0F1010`, gris carbón `#393836`; **Anton** (titulares) / **Cooper Hewitt Heavy** (rótulos y encabezados; sustituye a Garet desde el 25/10/2026) / **Open Sans** (texto). No usa `ufv.css`.
 - Cooper Hewitt no está en Google Fonts: alojar los `woff2` en `assets/fonts/` y declararlos con `@font-face` (reserva: Open Sans 800). **Pendiente de aplicar en el código**: la portada todavía carga Garet (Montserrat de reserva).
 - Logos de terceros siempre en una sola tinta (blanco sobre carbón o negro, negro sobre claro).
 - Enlaces en el bloque `ENLACES` (todos en pestaña nueva, `noopener noreferrer`); vacío = «Próximamente».
@@ -52,14 +52,14 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `portada/` | Portada del curso Narrativa Periodística | 1400 |
+| `portada/` | Portada del curso Narrativa Periodística I | 1400 |
 
 ## Plan de trabajo
-`plan-trabajo/index.html` → plan de trabajo interactivo 2026–2027 (página de Canvas «Plan de trabajo interactivo»). Misma identidad de marca que la portada, ya con **Cooper Hewitt Heavy** desde `../assets/fonts/` (reserva Open Sans 800).
+`plan-trabajo/index.html` → plan de trabajo interactivo 2026–2027 (página de Canvas «Plan de trabajo interactivo»). Titular H1: «Plan de trabajo»; la asignatura va en la entradilla. Misma identidad de marca que la portada, ya con **Cooper Hewitt Heavy** desde `../assets/fonts/` (reserva Open Sans 800).
 - Cada sesión es una pareja de tarjetas (`.pair`): presencial (`pres`, `pres eval` = práctica evaluable, `pres exam` = examen) y virtual (`virt`). Se abren con el ratón o el foco; clic/Enter las fija; Escape las cierra.
 - La pareja de la semana en curso se marca sola con «Esta semana» (según `data-fecha`).
 - En móvil (≤540 px) las tarjetas pasan a una columna, así que la página es más alta que el iframe: el iframe va **sin** `scrolling="no"` para que en móvil se pueda desplazar dentro.
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `plan-trabajo/` | Plan de trabajo interactivo de Narrativa Periodística I | 4870 |
+| `plan-trabajo/` | Plan de trabajo interactivo de Narrativa Periodística I | 4820 |
