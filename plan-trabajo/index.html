@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- No indexar en buscadores -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Plan de trabajo · Narrativa Periodística I · 2026–2027</title>
+
+<!--
+  PLAN DE TRABAJO INTERACTIVO · NARRATIVA PERIODÍSTICA I
+  Identidad: «Identidad visual de marca (guía unificada)».
+  Cada sesión es una pareja de tarjetas (presencial y virtual). Para cambiar
+  el contenido, edita el texto dentro de <span class="txt">…</span>.
+  Tipos de tarjeta presencial: «pres» (clase y taller), «pres eval»
+  (práctica evaluable) y «pres exam» (examen).
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600;700;800&display=swap">
+<link rel="preload" href="../assets/fonts/CooperHewitt-Heavy.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+@font-face{font-family:'Cooper Hewitt'; src:url('../assets/fonts/CooperHewitt-Heavy.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap}
+
+:root{
+  --yellow:#FDDA48;
+  --ink:#0F1010;
+  --stone:#393836;
+  --stone-2:#2B2A28;
+  --paper:#FFFFFF;
+  --muted:#676762;
+  --line:#D9D9D3;
+  --card:#F4F4F0;
+  --f-display:'Anton', Impact, sans-serif;
+  --f-label:'Cooper Hewitt', 'Open Sans', Arial, sans-serif;
+  --f-body:'Open Sans', Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px; margin:0 auto; padding:22px clamp(14px,4vw,36px) 34px}
+.label{font-family:var(--f-label); font-weight:800; text-transform:uppercase; letter-spacing:.14em; font-size:11.5px; line-height:1.3}
+
+/* ---------- Cabecera ---------- */
+.topline{display:flex; align-items:center; justify-content:space-between; gap:8px 16px; flex-wrap:wrap; padding-bottom:12px; border-bottom:2px solid var(--ink)}
+.insignia{background:var(--yellow); padding:6px 12px; white-space:nowrap}
+
+.hero{position:relative; overflow:hidden; background:var(--yellow); margin-top:16px; padding:clamp(24px,4.5vw,44px)}
+.hero .firma{display:inline-flex; align-items:center; gap:10px; margin:0 0 12px}
+.hero .firma::before{content:""; width:28px; height:2px; background:var(--ink)}
+.hero h1{position:relative; margin:0 0 14px; font:400 clamp(36px,6vw,64px)/1.02 var(--f-display); text-transform:uppercase; max-width:14ch}
+.hero .intro{position:relative; margin:0; max-width:62ch; font-size:clamp(15.5px,1.7vw,17.5px); line-height:1.6}
+.hero .marca{position:absolute; right:clamp(14px,4vw,40px); bottom:-.16em; font:400 clamp(130px,22vw,240px)/1 var(--f-display); color:rgba(15,16,16,.07); pointer-events:none; user-select:none}
+
+/* ---------- Leyenda ---------- */
+.leyenda{display:flex; flex-wrap:wrap; gap:10px 22px; margin:20px 0 0; padding:0; list-style:none; font-size:14px}
+.leyenda li{display:flex; align-items:center; gap:9px}
+.sw{flex:none; width:22px; height:16px}
+.sw.pres{background:var(--yellow)}
+.sw.eval{background:var(--paper); box-shadow:inset 0 0 0 3px var(--ink)}
+.sw.exam{background:var(--ink); box-shadow:inset 0 -4px 0 var(--yellow)}
+.sw.virt{background:var(--stone)}
+
+/* ---------- Columnas ---------- */
+.heads,.pair{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.heads{margin:24px 0 12px}
+.heads div{display:flex; align-items:center; gap:10px; padding:0 0 10px; border-bottom:2px solid var(--ink)}
+.heads div::before{content:""; flex:none; width:14px; height:14px; background:var(--yellow)}
+.heads div + div::before{background:var(--stone)}
+.pair{margin-bottom:16px; align-items:stretch; position:relative}
+
+/* ---------- Tarjetas ---------- */
+.card{position:relative; display:grid; align-items:start; width:100%; min-height:132px; margin:0; padding:20px 46px 20px 22px;
+  border:0; border-radius:0; text-align:left; font:inherit; color:inherit; cursor:pointer;
+  -webkit-tap-highlight-color:transparent}
+.card .front,.card .back{grid-area:1/1; min-width:0; display:flex; flex-direction:column; gap:6px;
+  transition:opacity 220ms ease, transform 220ms ease, visibility 220ms; pointer-events:none}
+.card .front{opacity:1; visibility:visible; transform:translateY(0)}
+.card .back{opacity:0; visibility:hidden; transform:translateY(6px)}
+.card[aria-expanded=true] .front{opacity:0; visibility:hidden; transform:translateY(-6px)}
+.card[aria-expanded=true] .back{opacity:1; visibility:visible; transform:translateY(0)}
+
+.ses{font:400 clamp(24px,3vw,30px)/1.05 var(--f-display); text-transform:uppercase; letter-spacing:.01em}
+.front time{font-family:var(--f-label); font-weight:800; font-size:13px; letter-spacing:.12em}
+.txt{font-size:15.5px; line-height:1.5; font-weight:600}
+.periodo,.lugar{font-size:13.5px; line-height:1.45}
+.lado{display:none; font-family:var(--f-label); font-weight:800; text-transform:uppercase; letter-spacing:.12em; font-size:10.5px; opacity:.75; margin-bottom:2px}
+.tag{align-self:flex-start; font-family:var(--f-label); font-weight:800; text-transform:uppercase; letter-spacing:.12em; font-size:10.5px; line-height:1; padding:5px 8px; margin-bottom:4px}
+
+/* Indicador «+» (gira al fijar la tarjeta) */
+.mas{position:absolute; top:16px; right:16px; width:18px; height:18px; transition:transform 220ms ease}
+.mas::before,.mas::after{content:""; position:absolute; left:50%; top:50%; background:currentColor; transform:translate(-50%,-50%)}
+.mas::before{width:14px; height:2px}
+.mas::after{width:2px; height:14px}
+.card.fija .mas{transform:rotate(45deg)}
+
+/* Presencial: clase y taller */
+.card.pres{background:var(--yellow); color:var(--ink)}
+.card.pres:hover,.card.pres[aria-expanded=true]{background:#F7D23A}
+/* Práctica evaluable */
+.card.pres.eval{background:var(--paper); box-shadow:inset 0 0 0 3px var(--ink)}
+.card.pres.eval .tag{background:var(--ink); color:var(--yellow)}
+/* Examen */
+.card.pres.exam{background:var(--ink); color:#fff}
+.card.pres.exam .ses,.card.pres.exam .mas{color:var(--yellow)}
+.card.pres.exam .tag{background:var(--yellow); color:var(--ink)}
+.card.pres.exam{box-shadow:inset 0 -6px 0 var(--yellow)}
+/* Virtual semanal */
+.card.virt{background:var(--stone); color:#fff}
+.card.virt:hover,.card.virt[aria-expanded=true]{background:var(--stone-2)}
+.card.virt time,.card.virt .mas{color:var(--yellow)}
+.card.virt .periodo{color:#E7E6E1}
+.card.virt .txt{font-weight:600}
+
+.card:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
+
+/* Semana en curso */
+.pair.actual::before{content:"Esta semana"; position:absolute; left:-5px; top:-16px; z-index:1; font-family:var(--f-label); font-weight:800; text-transform:uppercase;
+  letter-spacing:.12em; font-size:10.5px; line-height:1; padding:5px 8px; background:var(--ink); color:var(--yellow)}
+.pair.actual{outline:2px solid var(--ink); outline-offset:5px}
+
+/* ---------- Pie ---------- */
+footer{margin-top:28px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:14px; line-height:1.6}
+footer p{margin:0 0 6px}
+footer .label{display:block; margin-top:12px; font-size:10.5px}
+
+@media (prefers-reduced-motion:reduce){
+  .card .front,.card .back,.mas{transition:none; transform:none !important}
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width:650px){
+  .wrap{padding:12px 10px 25px}
+  .hero{padding:28px 21px}
+}
+@media (max-width:540px){
+  .heads{display:none}
+  .pair{grid-template-columns:1fr; gap:8px; margin-bottom:24px}
+  .card{min-height:104px; padding:16px 42px 16px 16px}
+  .lado{display:block}
+  .ses{font-size:24px}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  .card .front,.card .back{grid-area:auto; opacity:1 !important; visibility:visible !important; transform:none !important; transition:none !important}
+  .card{min-height:0; display:flex; flex-direction:column; gap:8px}
+  .pair{break-inside:avoid}
+  .mas,.pair.actual::before{display:none}
+  .pair.actual{outline:none}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="topline">
+    <span class="label">Universidad Francisco de Vitoria</span>
+    <span class="label insignia">Curso 2026–2027</span>
+  </header>
+
+  <section class="hero" aria-labelledby="titulo">
+    <p class="label firma">Plan de trabajo · 2026–2027</p>
+    <h1 id="titulo">Narrativa Periodística I</h1>
+    <p class="intro">27 viernes para aprender a contar noticias. Pasa el ratón o lleva el foco a una tarjeta para consultar su contenido. Pulsa para fijarla abierta o cerrarla; también puedes usar Enter o la barra espaciadora.</p>
+    <span class="marca" aria-hidden="true">27</span>
+  </section>
+
+  <ul class="leyenda" aria-label="Leyenda">
+    <li><span class="sw pres" aria-hidden="true"></span>Clase y taller</li>
+    <li><span class="sw eval" aria-hidden="true"></span>Práctica evaluable</li>
+    <li><span class="sw exam" aria-hidden="true"></span>Examen de evaluación continua</li>
+    <li><span class="sw virt" aria-hidden="true"></span>Trabajo semanal</li>
+  </ul>
+
+  <div class="heads" aria-hidden="true">
+    <div class="label">Actividad presencial · viernes</div>
+    <div class="label">Actividad virtual semanal</div>
+  </div>
+
+<div class="pair" data-fecha="11/09/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p1" aria-label="Actividad presencial, sesión 1, 11/09/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 1</span><time>11/09/2026</time></span><span class="back" id="p1" aria-hidden="true"><span class="txt">Presentación</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v1" aria-label="Actividad virtual semanal, sesión 1, 11/09/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 1</span><time>11/09/2026</time></span><span class="back" id="v1" aria-hidden="true"><span class="txt">Visionado de la película «La sombra del poder». Grabar una presentación personal en vídeo de 1 minuto.</span><span class="periodo">Del 11/09/2026 al 17/09/2026; próxima clase 18/09/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="18/09/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p2" aria-label="Actividad presencial, sesión 2, 18/09/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 2</span><time>18/09/2026</time></span><span class="back" id="p2" aria-hidden="true"><span class="txt">Explicación y presentación del proyecto transversal</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v2" aria-label="Actividad virtual semanal, sesión 2, 18/09/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 2</span><time>18/09/2026</time></span><span class="back" id="v2" aria-hidden="true"><span class="txt">Tarea 1. Audio pódcast «Los desafíos del periodismo actual». Lectura de la guía docente.</span><span class="periodo">Del 18/09/2026 al 24/09/2026; próxima clase 25/09/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="25/09/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p3" aria-label="Actividad presencial, sesión 3, 25/09/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 3</span><time>25/09/2026</time></span><span class="back" id="p3" aria-hidden="true"><span class="txt">Explicación de Canvas, GPTs y cuaderno LM de la asignatura</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v3" aria-label="Actividad virtual semanal, sesión 3, 25/09/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 3</span><time>25/09/2026</time></span><span class="back" id="v3" aria-hidden="true"><span class="txt">Navegación por los elementos multimedia de la asignatura: Canvas, Chat, Gamificación y Notebook.</span><span class="periodo">Del 25/09/2026 al 01/10/2026; próxima clase 02/10/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="02/10/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p4" aria-label="Actividad presencial, sesión 4, 02/10/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 4</span><time>02/10/2026</time></span><span class="back" id="p4" aria-hidden="true"><span class="txt">Géneros periodísticos</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v4" aria-label="Actividad virtual semanal, sesión 4, 02/10/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 4</span><time>02/10/2026</time></span><span class="back" id="v4" aria-hidden="true"><span class="txt">Lectura de la presentación y del dosier de la Unidad 1 Géneros. Realizar «Evalúa tu conocimiento».</span><span class="periodo">Del 02/10/2026 al 08/10/2026; próxima clase 09/10/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="09/10/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p5" aria-label="Actividad presencial, sesión 5, 09/10/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 5</span><time>09/10/2026</time></span><span class="back" id="p5" aria-hidden="true"><span class="txt">Fundamentos de la noticia I. Definición</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v5" aria-label="Actividad virtual semanal, sesión 5, 09/10/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 5</span><time>09/10/2026</time></span><span class="back" id="v5" aria-hidden="true"><span class="txt">Lectura de la presentación de la Unidad 2 Fundamentos de la noticia.</span><span class="periodo">Del 09/10/2026 al 15/10/2026; próxima clase 16/10/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="16/10/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p6" aria-label="Actividad presencial, sesión 6, 16/10/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 6</span><time>16/10/2026</time></span><span class="back" id="p6" aria-hidden="true"><span class="txt">Fundamentos de la noticia II. Conceptos</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v6" aria-label="Actividad virtual semanal, sesión 6, 16/10/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 6</span><time>16/10/2026</time></span><span class="back" id="v6" aria-hidden="true"><span class="txt">Lectura del dosier de la Unidad 2 Fundamentos de la noticia.</span><span class="periodo">Del 16/10/2026 al 22/10/2026; próxima clase 23/10/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="23/10/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p7" aria-label="Actividad presencial, sesión 7, 23/10/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 7</span><time>23/10/2026</time></span><span class="back" id="p7" aria-hidden="true"><span class="txt">Mesa redonda: La IA y la protección de la persona desde una mirada basada en virtudes.</span><span class="lugar">Lugar: Sala de conferencias del edificio H</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v7" aria-label="Actividad virtual semanal, sesión 7, 23/10/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 7</span><time>23/10/2026</time></span><span class="back" id="v7" aria-hidden="true"><span class="txt">Hacer nota de prensa sobre la mesa redonda</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="30/10/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p8" aria-label="Actividad presencial, sesión 8, 30/10/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 8</span><time>30/10/2026</time></span><span class="back" id="p8" aria-hidden="true"><span class="txt">Fundamentos de la noticia III. Valores noticia</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v8" aria-label="Actividad virtual semanal, sesión 8, 30/10/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 8</span><time>30/10/2026</time></span><span class="back" id="v8" aria-hidden="true"><span class="txt">Realizar «Evalúa tu conocimiento» de la Unidad 2.</span><span class="periodo">Del 30/10/2026 al 05/11/2026; próxima clase 06/11/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="06/11/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p9" aria-label="Actividad presencial, sesión 9, 06/11/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 9</span><time>06/11/2026</time></span><span class="back" id="p9" aria-hidden="true"><span class="txt">Elementos y estructura de la noticia I. Cabeza de titulación</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v9" aria-label="Actividad virtual semanal, sesión 9, 06/11/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 9</span><time>06/11/2026</time></span><span class="back" id="v9" aria-hidden="true"><span class="txt">Hacer ejercicios de la plataforma de gamificación.</span><span class="periodo">Del 06/11/2026 al 12/11/2026; próxima clase 13/11/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="13/11/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p10" aria-label="Actividad presencial, sesión 10, 13/11/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 10</span><time>13/11/2026</time></span><span class="back" id="p10" aria-hidden="true"><span class="txt">Elementos y estructura de la noticia II. La entradilla. Dudas del proyecto transversal</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v10" aria-label="Actividad virtual semanal, sesión 10, 13/11/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 10</span><time>13/11/2026</time></span><span class="back" id="v10" aria-hidden="true"><span class="txt">Lectura de la presentación de la Unidad 3 Estructura de la noticia.</span><span class="periodo">Del 13/11/2026 al 19/11/2026; próxima clase 20/11/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="20/11/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p11" aria-label="Actividad presencial, sesión 11, 20/11/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 11</span><time>20/11/2026</time></span><span class="back" id="p11" aria-hidden="true"><span class="txt">Elementos y estructura de la noticia III. Cuerpo y pirámide invertida</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v11" aria-label="Actividad virtual semanal, sesión 11, 20/11/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 11</span><time>20/11/2026</time></span><span class="back" id="v11" aria-hidden="true"><span class="txt">Ver la videolección 1 La cabeza de titulación.</span><span class="periodo">Del 20/11/2026 al 26/11/2026; próxima clase 27/11/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="27/11/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p12" aria-label="Actividad presencial, sesión 12, 27/11/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 12</span><time>27/11/2026</time></span><span class="back" id="p12" aria-hidden="true"><span class="txt">Ejercicio 1. Cabeza de titulación. Caso 1 Buitre</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v12" aria-label="Actividad virtual semanal, sesión 12, 27/11/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 12</span><time>27/11/2026</time></span><span class="back" id="v12" aria-hidden="true"><span class="txt">Ver la videocorrección del ejercicio 1 La cabeza de titulación.</span><span class="periodo">Del 27/11/2026 al 03/12/2026; próxima clase 04/12/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="04/12/2026"><button class="card pres eval" type="button" aria-expanded="false" aria-controls="p13" aria-label="Actividad presencial, sesión 13, 04/12/2026, práctica evaluable"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="tag">Práctica evaluable</span><span class="ses">Sesión 13</span><time>04/12/2026</time></span><span class="back" id="p13" aria-hidden="true"><span class="txt">Práctica evaluable 1. Cabeza de titulación. Caso 2 Bañistas</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v13" aria-label="Actividad virtual semanal, sesión 13, 04/12/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 13</span><time>04/12/2026</time></span><span class="back" id="v13" aria-hidden="true"><span class="txt">Lectura del dosier de la Unidad 3 Estructura de la noticia. Realizar «Evalúa tu conocimiento».</span><span class="periodo">Del 04/12/2026 al 10/12/2026; próxima clase 11/12/2026.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="11/12/2026"><button class="card pres" type="button" aria-expanded="false" aria-controls="p14" aria-label="Actividad presencial, sesión 14, 11/12/2026"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 14</span><time>11/12/2026</time></span><span class="back" id="p14" aria-hidden="true"><span class="txt">Claves de titulación</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v14" aria-label="Actividad virtual semanal, sesión 14, 11/12/2026"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 14</span><time>11/12/2026</time></span><span class="back" id="v14" aria-hidden="true"><span class="txt">Ver la videolección 2 La entradilla.</span><span class="periodo">Del 11/12/2026 al 04/02/2027; próxima clase 05/02/2027. Realizar en días lectivos disponibles; las vacaciones son de descanso.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="05/02/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p15" aria-label="Actividad presencial, sesión 15, 05/02/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 15</span><time>05/02/2027</time></span><span class="back" id="p15" aria-hidden="true"><span class="txt">Explicación del reportaje del proyecto transversal</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v15" aria-label="Actividad virtual semanal, sesión 15, 05/02/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 15</span><time>05/02/2027</time></span><span class="back" id="v15" aria-hidden="true"><span class="txt">Ejercicio 2 La entradilla.</span><span class="periodo">Del 05/02/2027 al 11/02/2027; próxima clase 12/02/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="12/02/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p16" aria-label="Actividad presencial, sesión 16, 12/02/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 16</span><time>12/02/2027</time></span><span class="back" id="p16" aria-hidden="true"><span class="txt">El estilo periodístico informativo. Caso 3 Guerra Justa</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v16" aria-label="Actividad virtual semanal, sesión 16, 12/02/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 16</span><time>12/02/2027</time></span><span class="back" id="v16" aria-hidden="true"><span class="txt">Ejercicio 3 Jerarquización y ordenación lógica de la información.</span><span class="periodo">Del 12/02/2027 al 18/02/2027; próxima clase 19/02/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="19/02/2027"><button class="card pres eval" type="button" aria-expanded="false" aria-controls="p17" aria-label="Actividad presencial, sesión 17, 19/02/2027, práctica evaluable"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="tag">Práctica evaluable</span><span class="ses">Sesión 17</span><time>19/02/2027</time></span><span class="back" id="p17" aria-hidden="true"><span class="txt">Práctica evaluable 2</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v17" aria-label="Actividad virtual semanal, sesión 17, 19/02/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 17</span><time>19/02/2027</time></span><span class="back" id="v17" aria-hidden="true"><span class="txt">Visionado de la clase online. Hacer titulares.</span><span class="periodo">Del 19/02/2027 al 25/02/2027; próxima clase 26/02/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="26/02/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p18" aria-label="Actividad presencial, sesión 18, 26/02/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 18</span><time>26/02/2027</time></span><span class="back" id="p18" aria-hidden="true"><span class="txt">Corrección de la práctica evaluable 2. Explicación del chatbot funcional</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v18" aria-label="Actividad virtual semanal, sesión 18, 26/02/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 18</span><time>26/02/2027</time></span><span class="back" id="v18" aria-hidden="true"><span class="txt">Trabajar en equipo el chatbot para la web.</span><span class="periodo">Del 26/02/2027 al 04/03/2027; próxima clase 05/03/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="05/03/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p19" aria-label="Actividad presencial, sesión 19, 05/03/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 19</span><time>05/03/2027</time></span><span class="back" id="p19" aria-hidden="true"><span class="txt">Caso 4 Avión</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v19" aria-label="Actividad virtual semanal, sesión 19, 05/03/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 19</span><time>05/03/2027</time></span><span class="back" id="v19" aria-hidden="true"><span class="txt">Vídeo del ejercicio 4 Rueda de prensa.</span><span class="periodo">Del 05/03/2027 al 11/03/2027; próxima clase 12/03/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="12/03/2027"><button class="card pres eval" type="button" aria-expanded="false" aria-controls="p20" aria-label="Actividad presencial, sesión 20, 12/03/2027, práctica evaluable"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="tag">Práctica evaluable</span><span class="ses">Sesión 20</span><time>12/03/2027</time></span><span class="back" id="p20" aria-hidden="true"><span class="txt">Práctica evaluable 3</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v20" aria-label="Actividad virtual semanal, sesión 20, 12/03/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 20</span><time>12/03/2027</time></span><span class="back" id="v20" aria-hidden="true"><span class="txt">Practicar con los ejercicios de la plataforma de gamificación.</span><span class="periodo">Del 12/03/2027 al 18/03/2027; próxima clase 19/03/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="19/03/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p21" aria-label="Actividad presencial, sesión 21, 19/03/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 21</span><time>19/03/2027</time></span><span class="back" id="p21" aria-hidden="true"><span class="txt">Corrección de la práctica evaluable 3</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v21" aria-label="Actividad virtual semanal, sesión 21, 19/03/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 21</span><time>19/03/2027</time></span><span class="back" id="v21" aria-hidden="true"><span class="txt">Practicar ejercicios de extracción de las 5 W y titulares ofrecidos en documentos PDF.</span><span class="periodo">Del 19/03/2027 al 01/04/2027; próxima clase 02/04/2027. Realizar en días lectivos disponibles; pausa de Semana Santa del 20 al 29 de marzo.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="02/04/2027"><button class="card pres eval" type="button" aria-expanded="false" aria-controls="p22" aria-label="Actividad presencial, sesión 22, 02/04/2027, práctica evaluable"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="tag">Práctica evaluable</span><span class="ses">Sesión 22</span><time>02/04/2027</time></span><span class="back" id="p22" aria-hidden="true"><span class="txt">Práctica evaluable 4</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v22" aria-label="Actividad virtual semanal, sesión 22, 02/04/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 22</span><time>02/04/2027</time></span><span class="back" id="v22" aria-hidden="true"><span class="txt">Ejercicio 5 Cobertura informativa.</span><span class="periodo">Del 02/04/2027 al 08/04/2027; próxima clase 09/04/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="09/04/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p23" aria-label="Actividad presencial, sesión 23, 09/04/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 23</span><time>09/04/2027</time></span><span class="back" id="p23" aria-hidden="true"><span class="txt">Corrección de la práctica evaluable 4</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v23" aria-label="Actividad virtual semanal, sesión 23, 09/04/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 23</span><time>09/04/2027</time></span><span class="back" id="v23" aria-hidden="true"><span class="txt">Practicar con los ejercicios de la plataforma de gamificación.</span><span class="periodo">Del 09/04/2027 al 15/04/2027; próxima clase 16/04/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="16/04/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p24" aria-label="Actividad presencial, sesión 24, 16/04/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 24</span><time>16/04/2027</time></span><span class="back" id="p24" aria-hidden="true"><span class="txt">Dudas de la fase final del proyecto transversal</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v24" aria-label="Actividad virtual semanal, sesión 24, 16/04/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 24</span><time>16/04/2027</time></span><span class="back" id="v24" aria-hidden="true"><span class="txt">Practicar con los ejercicios de la plataforma de gamificación.</span><span class="periodo">Del 16/04/2027 al 22/04/2027; próxima clase 23/04/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="23/04/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p25" aria-label="Actividad presencial, sesión 25, 23/04/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 25</span><time>23/04/2027</time></span><span class="back" id="p25" aria-hidden="true"><span class="txt">Práctica de redacciones con ChatGPT</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v25" aria-label="Actividad virtual semanal, sesión 25, 23/04/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 25</span><time>23/04/2027</time></span><span class="back" id="v25" aria-hidden="true"><span class="txt">Practicar ejercicios con ChatGPT ACN WRITER.</span><span class="periodo">Del 23/04/2027 al 29/04/2027; próxima clase 30/04/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="30/04/2027"><button class="card pres" type="button" aria-expanded="false" aria-controls="p26" aria-label="Actividad presencial, sesión 26, 30/04/2027"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="ses">Sesión 26</span><time>30/04/2027</time></span><span class="back" id="p26" aria-hidden="true"><span class="txt">Prácticas de redacciones con Gemini</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v26" aria-label="Actividad virtual semanal, sesión 26, 30/04/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 26</span><time>30/04/2027</time></span><span class="back" id="v26" aria-hidden="true"><span class="txt">Practicar ejercicios con Gemini.</span><span class="periodo">Del 30/04/2027 al 06/05/2027; próxima clase 07/05/2027.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+<div class="pair" data-fecha="07/05/2027"><button class="card pres exam" type="button" aria-expanded="false" aria-controls="p27" aria-label="Actividad presencial, sesión 27, 07/05/2027, examen"><span class="front" aria-hidden="false"><span class="lado">Presencial · viernes</span><span class="tag">Examen</span><span class="ses">Sesión 27</span><time>07/05/2027</time></span><span class="back" id="p27" aria-hidden="true"><span class="txt">Examen de evaluación continua</span></span><span class="mas" aria-hidden="true"></span></button><button class="card virt" type="button" aria-expanded="false" aria-controls="v27" aria-label="Actividad virtual semanal, sesión 27, 07/05/2027"><span class="front" aria-hidden="false"><span class="lado">Virtual semanal</span><span class="ses">Sesión 27</span><time>07/05/2027</time></span><span class="back" id="v27" aria-hidden="true"><span class="txt">Preparar el examen final de la convocatoria ordinaria.</span><span class="periodo">Desde el 07/05/2027 hasta el examen final de convocatoria ordinaria, cuya fecha se comunicará en el calendario.</span></span><span class="mas" aria-hidden="true"></span></button></div>
+
+  <footer>
+    <p>Las semanas docentes coinciden con las sesiones. El trabajo virtual se vincula a la siguiente clase y respeta las vacaciones. El 19 de marzo se mantiene según el calendario disponible.</p>
+    <p><strong>Examen de evaluación continua: 7 de mayo de 2027.</strong></p>
+    <span class="label">Narrativa Periodística I · Universidad Francisco de Vitoria</span>
+  </footer>
+</main>
+
+<script>
+/* Tarjetas: se abren al pasar el ratón o con el foco; un clic (o Enter/Espacio) las fija; Escape las cierra. */
+document.querySelectorAll('.card').forEach(c => {
+  let fija = false;
+  const front = c.querySelector('.front'), back = c.querySelector('.back');
+  const show = v => {
+    c.setAttribute('aria-expanded', String(v));
+    back.setAttribute('aria-hidden', String(!v));
+    front.setAttribute('aria-hidden', String(v));
+  };
+  c.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') show(true); });
+  c.addEventListener('pointerleave', () => { if (!fija) show(false); });
+  c.addEventListener('focus', () => show(true));
+  c.addEventListener('blur', () => { if (!fija) show(false); });
+  c.addEventListener('click', () => { fija = !fija; c.classList.toggle('fija', fija); show(fija); });
+  c.addEventListener('keydown', e => { if (e.key === 'Escape') { fija = false; c.classList.remove('fija'); show(false); } });
+});
+
+/* Marca la sesión de la semana en curso (de un viernes al jueves siguiente). */
+(function () {
+  const pares = [...document.querySelectorAll('.pair')];
+  const fecha = el => { const [d, m, a] = el.dataset.fecha.split('/').map(Number); return new Date(a, m - 1, d); };
+  const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  let actual = null;
+  pares.forEach(p => { if (fecha(p) <= hoy) actual = p; });
+  const ultimo = pares[pares.length - 1];
+  if (actual && !(actual === ultimo && hoy - fecha(ultimo) > 7 * 864e5)) actual.classList.add('actual');
+})();
+</script>
+</body>
+</html>

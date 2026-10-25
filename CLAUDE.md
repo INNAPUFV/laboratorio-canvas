@@ -8,7 +8,9 @@ Publicación: GitHub Pages → `https://innapufv.github.io/laboratorio-canvas/<c
 ## Estructura
 ```
 assets/          ufv.css (copia propia, independiente de formacion-ia) + contacto.jpg
+  fonts/         Cooper Hewitt Heavy y Light (woff2, latin; licencia OFL en OFL-CooperHewitt.txt)
 portada/         portada HTML del curso (página de inicio de Canvas)
+plan-trabajo/    plan de trabajo interactivo de Narrativa Periodística I (27 sesiones)
 comunicaciones/  anuncios, banners de tablero y correos
 multimedia/      recursos didácticos interactivos (animaciones, reproductores…)
 ```
@@ -51,3 +53,13 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | Carpeta | Pieza | iframe |
 |---|---|---|
 | `portada/` | Portada del curso Narrativa Periodística | 1400 |
+
+## Plan de trabajo
+`plan-trabajo/index.html` → plan de trabajo interactivo 2026–2027 (página de Canvas «Plan de trabajo interactivo»). Misma identidad de marca que la portada, ya con **Cooper Hewitt Heavy** desde `../assets/fonts/` (reserva Open Sans 800).
+- Cada sesión es una pareja de tarjetas (`.pair`): presencial (`pres`, `pres eval` = práctica evaluable, `pres exam` = examen) y virtual (`virt`). Se abren con el ratón o el foco; clic/Enter las fija; Escape las cierra.
+- La pareja de la semana en curso se marca sola con «Esta semana» (según `data-fecha`).
+- En móvil (≤540 px) las tarjetas pasan a una columna, así que la página es más alta que el iframe: el iframe va **sin** `scrolling="no"` para que en móvil se pueda desplazar dentro.
+
+| Carpeta | Pieza | iframe |
+|---|---|---|
+| `plan-trabajo/` | Plan de trabajo interactivo de Narrativa Periodística I | 4870 |
