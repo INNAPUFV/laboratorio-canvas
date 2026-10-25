@@ -48,4 +48,4 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `portada/` | Portada del curso Narrativa Periodística | 1360 |
+| `portada/` | Portada del curso Narrativa Periodística | 1400 |

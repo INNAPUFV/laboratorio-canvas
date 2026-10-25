@@ -139,7 +139,8 @@ a.tutoria:hover .boton svg{transform:translateX(3px)}
 .pendiente .boton, a.tutoria.pendiente .boton{background:transparent; color:inherit; box-shadow:inset 0 0 0 1px currentColor; opacity:.6}
 
 /* Pie */
-footer{margin-top:24px; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--muted)}
+.aviso-ia{margin:12px auto 0; text-align:center; text-wrap:balance; font-size:11px; line-height:1.5; color:var(--muted)}
+footer{margin-top:20px; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--muted)}
 footer .label{font-size:10.5px}
 
 /* Foco y movimiento */
@@ -272,6 +273,10 @@ a:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
       <span class="ir">Preguntar <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </a>
   </div>
+
+  <!-- Aviso sobre los chatbots de IA (bajo PlumIA y ACN BOT) -->
+  <p class="aviso-ia" role="note">Los chatbots de IA pueden producir información inexacta, por lo que el uso y la comprobación de sus resultados son responsabilidad del alumno.<br>
+  La referencia oficial de los contenidos serán siempre los apuntes y contenidos del profesor colgados en el Canvas de la asignatura.</p>
 
   <footer>
     <span class="label">Narrativa Periodística</span>
