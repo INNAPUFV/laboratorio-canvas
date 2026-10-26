@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- No indexar en buscadores -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="light">
+<title>Nuevo diseño, mismos contenidos | Narrativa Periodística I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600;700;800&display=swap">
+<link rel="preload" href="../../assets/fonts/CooperHewitt-Heavy.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Identidad de marca v2.1: Anton · Cooper Hewitt · Open Sans. Negro puro en la franja de datos y la tarjeta oscura. */
+@font-face{font-family:'Cooper Hewitt'; src:url('../../assets/fonts/CooperHewitt-Heavy.woff2') format('woff2'); font-weight:800; font-display:swap}
+@font-face{font-family:'Cooper Hewitt'; src:url('../../assets/fonts/CooperHewitt-Light.woff2') format('woff2'); font-weight:300; font-display:swap}
+:root{--yellow:#fdda48;--ink:#0f1010;--stone:#393836;--paper:#fff;--muted:#676762;--line:#d9d9d3;--card:#f4f4f0;
+  --f-label:'Cooper Hewitt','Open Sans',Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Open Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:1080px;margin:auto;padding:28px clamp(14px,4vw,40px) 46px}
+.label,.topline,.kicker,.eyebrow,.fact small{font-family:var(--f-label);font-weight:800;text-transform:uppercase}
+
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:14px;font-size:12px;letter-spacing:.14em}
+.edition{color:var(--stone)}
+.tag{background:var(--yellow);padding:7px 11px;white-space:nowrap}
+
+.hero{background:var(--yellow);padding:clamp(24px,5vw,52px);position:relative;overflow:hidden;isolation:isolate}
+.kicker{letter-spacing:.15em;font-size:12px;margin:0 0 20px}
+.hero h1{font:400 clamp(33px,5vw,62px)/1.08 'Anton',sans-serif;margin:0;max-width:16ch;text-transform:uppercase}
+.hero .sub{font-size:clamp(16px,2vw,20px);line-height:1.55;max-width:640px;margin:20px 0 0}
+
+/* Franja de datos (negro puro) */
+.facts{display:grid;grid-template-columns:1fr 1fr;background:var(--ink);color:#fff}
+.fact{padding:22px 28px;display:flex;gap:16px;align-items:center}
+.fact+.fact{border-left:1px solid #474844}
+.ico{display:grid;place-items:center;width:42px;height:42px;flex:none;background:var(--yellow);color:var(--ink)}
+.ico svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fact small{display:block;font-size:11px;letter-spacing:.14em;color:var(--yellow);margin-bottom:5px}
+.fact strong{font-family:var(--f-label);font-weight:300;font-size:clamp(15px,1.8vw,19px);line-height:1.35}
+
+/* Animación: la portada antes y ahora */
+.demo{margin-top:34px}
+.demo-head{display:flex;align-items:end;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-bottom:12px}
+.eyebrow{letter-spacing:.13em;font-size:12px;color:var(--muted);margin:0 0 6px}
+.demo h2{font:400 clamp(24px,3vw,32px)/1.1 'Anton',sans-serif;text-transform:uppercase;margin:0}
+.switch{display:inline-flex;border:2px solid var(--ink)}
+.switch button{font:800 11.5px/1 var(--f-label);letter-spacing:.14em;text-transform:uppercase;border:0;background:var(--paper);color:var(--ink);padding:10px 16px;cursor:pointer}
+.switch button[aria-pressed=true]{background:var(--ink);color:var(--yellow)}
+.switch button:focus-visible{outline:3px solid var(--yellow);outline-offset:-5px}
+
+.mock{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:16px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.t{grid-column:span var(--a);order:var(--oa);position:relative;min-height:46px;display:flex;align-items:center;gap:8px;padding:8px 10px;
+  font:600 12.5px/1.2 'Open Sans',Arial,sans-serif;background:#dcdcd8;color:#5e5e5a;border-top:5px solid transparent;
+  transition:background .5s,color .5s,border-color .5s}
+.t i{flex:none;width:0;height:16px;background:var(--yellow);transition:width .4s}
+.sec{grid-column:1/-1;order:var(--o);display:none;align-items:center;gap:8px;padding:6px 0 3px;border-bottom:2px solid var(--ink);
+  font:800 10.5px/1 var(--f-label);letter-spacing:.14em;text-transform:uppercase}
+.sec b{background:var(--yellow);padding:3px 5px;font-weight:800}
+/* Estado «ahora» */
+.mock.ahora .t{grid-column:span var(--b);order:var(--ob);background:var(--paper);color:var(--ink);border-top-color:var(--yellow);
+  font-family:'Anton',sans-serif;font-weight:400;font-size:14px;text-transform:uppercase;letter-spacing:.01em}
+.mock.ahora .t i{width:16px}
+.mock.ahora .t.osc{background:var(--stone);color:#fff}
+.mock.ahora .t.banda{border-top-color:var(--line);box-shadow:inset 26px 0 0 var(--ink);padding-left:36px}
+.mock.ahora .t.banda i{display:none}
+.mock.ahora .sec{display:flex;animation:entra .5s both}
+@keyframes entra{from{opacity:0;transform:translateY(-4px)}}
+
+.mismos{margin:12px 0 0;font-size:14px;color:var(--muted)}
+.mismos strong{color:var(--ink)}
+
+/* Carta */
+.carta{margin-top:34px;display:grid;grid-template-columns:88px 1fr;border:1px solid var(--line);background:#fafaf8}
+.carta .symbol{display:grid;place-items:center;background:var(--ink);color:var(--yellow);font:400 40px/1 'Anton',sans-serif}
+.carta .text{padding:26px 32px}
+.carta p{font-size:17px;line-height:1.65;margin:0 0 12px}
+.carta p:last-child{margin:0}
+.firma{font-family:var(--f-label);font-weight:800;letter-spacing:.06em}
+
+.foot{margin-top:28px;border-top:1px solid var(--line);padding-top:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:12px;letter-spacing:.045em}
+
+@media(max-width:650px){
+  main{padding:12px 10px 25px}
+  .topline{font-size:10px}
+  .hero{padding:28px 21px}
+  .facts{grid-template-columns:1fr}
+  .fact{padding:17px 20px}
+  .fact+.fact{border-left:0;border-top:1px solid #474844}
+  .mock{gap:6px;padding:10px}
+  .t{font-size:10.5px;padding:6px 7px;min-height:40px}
+  .mock.ahora .t{font-size:11.5px}
+  .t i{height:12px}.mock.ahora .t i{width:12px}
+  .carta{grid-template-columns:54px 1fr}
+  .carta .symbol{font-size:28px}
+  .carta .text{padding:22px 17px}
+}
+@media(prefers-reduced-motion:reduce){.t,.t i{transition:none}.mock.ahora .sec{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <header class="topline"><span>Narrativa Periodística I <span class="edition">/ 2026–2027</span></span><span class="tag">Nota informativa</span></header>
+
+  <section class="hero" aria-labelledby="titulo">
+    <p class="kicker">Cambios en el diseño de la asignatura</p>
+    <h1 id="titulo">Nuevo diseño, mismos contenidos</h1>
+    <p class="sub">La asignatura estrena imagen para que encuentres antes lo que buscas.</p>
+  </section>
+
+  <section class="facts" aria-label="Qué cambia y qué no">
+    <div class="fact"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><div><small>Cambia</small><strong>El diseño: colores, letras y orden por secciones</strong></div></div>
+    <div class="fact"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><small>No cambia</small><strong>Los elementos y los contenidos de la asignatura</strong></div></div>
+  </section>
+
+  <section class="demo" aria-labelledby="demo-t">
+    <div class="demo-head">
+      <div>
+        <p class="eyebrow">Compruébalo en la portada</p>
+        <h2 id="demo-t">Los mismos 10 accesos, mejor ordenados</h2>
+      </div>
+      <div class="switch" role="group" aria-label="Ver la portada">
+        <button type="button" data-estado="antes" aria-pressed="true">Antes</button>
+        <button type="button" data-estado="ahora" aria-pressed="false">Ahora</button>
+      </div>
+    </div>
+
+    <!-- Miniatura de la portada. --a/--oa: ancho y orden antes; --b/--ob: ancho y orden ahora. -->
+    <div class="mock" id="mock" aria-hidden="true">
+      <span class="sec" style="--o:0"><b>01</b>Empieza aquí</span>
+      <span class="sec" style="--o:4"><b>02</b>Estudia</span>
+      <span class="sec" style="--o:7"><b>03</b>Practica</span>
+      <span class="sec" style="--o:11"><b>04</b>Resuelve tus dudas</span>
+      <span class="t" style="--a:2;--oa:1;--b:2;--ob:1"><i></i>Plan de trabajo</span>
+      <span class="t" style="--a:2;--oa:2;--b:2;--ob:2"><i></i>Guía docente</span>
+      <span class="t" style="--a:2;--oa:3;--b:2;--ob:10"><i></i>Aprende jugando</span>
+      <span class="t osc" style="--a:6;--oa:4;--b:6;--ob:5"><i></i>Unidades temáticas</span>
+      <span class="t banda" style="--a:6;--oa:5;--b:6;--ob:6"><i></i>Cuadernos</span>
+      <span class="t" style="--a:3;--oa:6;--b:2;--ob:3"><i></i>Tu profesor</span>
+      <span class="t" style="--a:3;--oa:7;--b:2;--ob:9"><i></i>Ejercicios</span>
+      <span class="t" style="--a:6;--oa:8;--b:3;--ob:13"><i></i>Tutoría</span>
+      <span class="t osc" style="--a:3;--oa:9;--b:2;--ob:8"><i></i>PlumIA</span>
+      <span class="t osc" style="--a:3;--oa:10;--b:3;--ob:12"><i></i>ACN BOT</span>
+    </div>
+    <p class="mismos" id="estado-texto" aria-live="polite"><strong>Antes:</strong> los accesos, sin agrupar.</p>
+  </section>
+
+  <section class="carta" aria-label="Mensaje del profesor">
+    <div class="symbol" aria-hidden="true">✎</div>
+    <div class="text">
+      <p>Queridos alumnos:</p>
+      <p>Solo una nota informativa. Como se aprecia, estoy haciendo cambios en el diseño de la asignatura para adaptarla a la identidad e imagen corporativa. <strong>Esto no afecta a los elementos ni al contenido.</strong> Espero que los cambios os ayuden a la navegabilidad de los contenidos.</p>
+      <p>Un saludo a todos,</p>
+      <p class="firma">Javier de la Rosa</p>
+    </div>
+  </section>
+
+  <footer class="foot"><span>NARRATIVA PERIODÍSTICA I · NOTA INFORMATIVA</span><span>Estudia · Practica · Aprende</span></footer>
+</main>
+
+<script>
+/* Antes / Ahora: los accesos se recolocan (técnica FLIP) sin cambiar su contenido.
+   Se reproduce sola una vez al aparecer en pantalla; los botones permiten comparar. */
+(function () {
+  const mock = document.getElementById('mock');
+  const tiles = [...mock.querySelectorAll('.t')];
+  const texto = document.getElementById('estado-texto');
+  const botones = document.querySelectorAll('.switch button');
+  const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const TXT = {
+    antes: '<strong>Antes:</strong> los accesos, sin agrupar.',
+    ahora: '<strong>Ahora:</strong> los mismos 10 accesos, en cuatro secciones: Empieza aquí, Estudia, Practica y Resuelve tus dudas.'
+  };
+  function poner(estado) {
+    const ahora = estado === 'ahora';
+    if (mock.classList.contains('ahora') === ahora) return;
+    const antes = tiles.map(t => t.getBoundingClientRect());
+    mock.classList.toggle('ahora', ahora);
+    botones.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.estado === estado)));
+    texto.innerHTML = TXT[estado];
+    if (quieto) return;
+    tiles.forEach((t, i) => {
+      const d = t.getBoundingClientRect(), a = antes[i];
+      t.animate([
+        { transform: `translate(${a.left - d.left}px, ${a.top - d.top}px)`, width: a.width + 'px' },
+        { transform: 'none', width: d.width + 'px' }
+      ], { duration: 650, delay: i * 35, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+    });
+  }
+  botones.forEach(b => b.addEventListener('click', () => poner(b.dataset.estado)));
+  /* Reproducción automática: una vez, cuando la miniatura entra en pantalla */
+  if ('IntersectionObserver' in window && !quieto) {
+    const io = new IntersectionObserver(e => {
+      if (e[0].isIntersecting) { io.disconnect(); setTimeout(() => poner('ahora'), 700); }
+    }, { threshold: .6 });
+    io.observe(mock);
+  } else { poner('ahora'); }
+})();
+</script>
+</body>
+</html>

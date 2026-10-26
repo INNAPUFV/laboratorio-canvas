@@ -78,3 +78,4 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | Carpeta | Pieza | iframe |
 |---|---|---|
 | `anuncio/sesion-07-mesa-redonda/` | Sesión 7 · Mesa redonda «La IA y la protección de la persona desde una mirada basada en virtudes» (23/10/2026) | 1440 |
+| `anuncio/nuevo-diseno/` | Nota informativa «Nuevo diseño, mismos contenidos» (26/10/2026). Miniatura animada de la portada: los mismos 10 accesos pasan del orden antiguo a las cuatro secciones (FLIP con Web Animations; se reproduce una vez al verse; botones Antes/Ahora; respeta `prefers-reduced-motion`) | 1520 |
