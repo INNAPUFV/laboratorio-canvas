@@ -11,7 +11,8 @@ assets/          ufv.css (copia propia, independiente de formacion-ia) + contact
   fonts/         Cooper Hewitt Heavy y Light (woff2, latin; licencia OFL en OFL-CooperHewitt.txt)
 portada/         portada HTML del curso (página de inicio de Canvas)
 plan-trabajo/    plan de trabajo interactivo de Narrativa Periodística I (27 sesiones)
-comunicaciones/  anuncios, banners de tablero y correos
+anuncio/         anuncios de la asignatura con su identidad de marca (una subcarpeta por anuncio)
+comunicaciones/  comunicaciones con estilo UFV: anuncios, banners de tablero y correos
 multimedia/      recursos didácticos interactivos (animaciones, reproductores…)
 ```
 
@@ -65,3 +66,15 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | Carpeta | Pieza | iframe |
 |---|---|---|
 | `plan-trabajo/` | Plan de trabajo interactivo de Narrativa Periodística I | 4820 |
+
+## Anuncios de la asignatura
+`anuncio/<sesion-NN-tema>/index.html` → anuncios de Narrativa Periodística I para Canvas, con la **identidad de marca de la asignatura** (no el estilo UFV de `comunicaciones/`). Guía: proyecto → `claude/Identidad visual (anuncios y PlumIA).md` y `claude/Identidad visual de marca (guía unificada).md`.
+- **Referencia / plantilla:** `anuncio/sesion-07-mesa-redonda/`. Para un anuncio nuevo, copiar esa carpeta y cambiar contenidos, número de sesión (etiqueta, `content:"07"` del número tenue y pie), fechas, lugar y enlaces. Los anteriores no se tocan (sus iframes deben seguir igual).
+- Estructura: cabecera (asignatura / curso + «Anuncio · Sesión NN») → bloque amarillo (entradilla, titular Anton, subtítulo; número tenue en Anton) → **franja de datos en negro puro** (cuándo / dónde) → «¿Qué vamos a hacer?» → actividad práctica con **banda de símbolo en negro puro** → dos tarjetas (clara y **negro puro**) → aviso → pie con lema.
+- **Negro puro `#0F1010` en los anuncios** (franja de datos, banda, tarjeta oscura); el carbón `#393836` es para interfaces (portada, PlumIA). No mezclarlos como fondos contiguos.
+- Fuentes: Anton y Open Sans de Google Fonts; Cooper Hewitt Heavy y Light desde `../../assets/fonts/`.
+- Enlaces a tareas de Canvas en pestaña nueva (`target="_blank" rel="noopener noreferrer"`). Iframe sin `scrolling="no"` (en el móvil la página es más alta).
+
+| Carpeta | Pieza | iframe |
+|---|---|---|
+| `anuncio/sesion-07-mesa-redonda/` | Sesión 7 · Mesa redonda «La IA y la protección de la persona desde una mirada basada en virtudes» (23/10/2026) | 1440 |
