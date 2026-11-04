@@ -36,6 +36,7 @@
   --muted:#676762;
   --line:#D9D9D3;
   --card:#F4F4F0;
+  --red:#FF5757;   /* Rojo ACN: acento puntual (recuadro de las prácticas evaluables) */
   --f-display:'Anton', Impact, sans-serif;
   --f-label:'Cooper Hewitt', 'Open Sans', Arial, sans-serif;
   --f-body:'Open Sans', Arial, sans-serif;
@@ -70,7 +71,7 @@ body{background:var(--paper); color:var(--ink); font-family:var(--f-body); font-
 .leyenda li{display:flex; align-items:center; gap:9px}
 .sw{flex:none; width:22px; height:16px}
 .sw.pres{background:var(--yellow)}
-.sw.eval{background:var(--paper); box-shadow:inset 0 0 0 3px var(--ink)}
+.sw.eval{background:var(--paper); box-shadow:inset 0 0 0 3px var(--red)}
 .sw.exam{background:var(--ink); box-shadow:inset 0 -4px 0 var(--yellow)}
 .sw.virt{background:var(--stone)}
 
@@ -111,7 +112,7 @@ body{background:var(--paper); color:var(--ink); font-family:var(--f-body); font-
 .card.pres{background:var(--yellow); color:var(--ink)}
 .card.pres:hover,.card.pres.abierta{background:#F7D23A}
 /* Práctica evaluable */
-.card.pres.eval{background:var(--paper); box-shadow:inset 0 0 0 3px var(--ink)}
+.card.pres.eval{background:var(--paper); box-shadow:inset 0 0 0 3px var(--red)}
 .card.pres.eval .tag{background:var(--ink); color:var(--yellow)}
 /* Examen */
 .card.pres.exam{background:var(--ink); color:#fff}
