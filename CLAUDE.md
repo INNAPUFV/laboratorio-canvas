@@ -109,13 +109,13 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 
 ## Ejercicios y videolecciones
 `ejercicios/index.html` → página para la página de Canvas «Ejercicios y videolecciones» (a la que enlaza la portada). Sustituye a los banners de imagen. Identidad de marca de la asignatura.
-- Cabecera «Ejercicios y videolecciones» + «Mira · Practica · Aprende». Dos secciones con rótulo numerado, como la portada: **01 Mira · Videolecciones** (3 tarjetas carbón con botón de reproducir amarillo: 1 Cabeza de titulación · 2 La entradilla · **3 Cómo hacer titulares**, antes «Clase online cómo hacer titulares») y **02 Practica · Ejercicios** (5 tarjetas blancas con número grande en Anton: 1 Cabeza de titulación · 2 Cabeza de titulación y entradilla · 3 Jerarquización y ordenación lógica · 4 Cobertura de una rueda de prensa · 5 Cobertura informativa).
-- Enlaces en el bloque `ENLACES` (claves `vl1`–`vl3`, `ej1`–`ej5`; pestaña nueva); vacío = «Próximamente». Tareas de Canvas con la dirección base (`/assignments/NNN`, sin `/launch`, `/taking/…` ni `?display=…`): VL1 579070 · VL2 579071 · Ej1 579025 · Ej2 579027 · Ej3 579024 · Ej4 579010 · Ej5 579014. **Pendiente: Videolección 3.**
+- Cabecera «Ejercicios y videolecciones» + «Mira · Practica · Aprende». Dos secciones con rótulo numerado, como la portada: **01 Mira · Videolecciones** (3 tarjetas carbón con botón de reproducir amarillo: **0 La estructura de la noticia** · 1 Cabeza de titulación · 2 La entradilla; la antigua «Clase online / Videolección 3 · Cómo hacer titulares» se ha quitado) y **02 Practica · Ejercicios** (5 tarjetas blancas con número grande en Anton: 1 Cabeza de titulación · 2 Cabeza de titulación y entradilla · 3 Jerarquización y ordenación lógica · 4 Cobertura de una rueda de prensa · 5 Cobertura informativa).
+- Enlaces en el bloque `ENLACES` (claves `vl0`–`vl2`, `ej1`–`ej5`; pestaña nueva); vacío = «Próximamente». Tareas de Canvas con la dirección base (`/assignments/NNN`, sin `/launch`, `/taking/…` ni `?display=…`): VL1 579070 · VL2 579071 · Ej1 579025 · Ej2 579027 · Ej3 579024 · Ej4 579010 · Ej5 579014. **Pendiente: Videolección 0.**
 - Los cinco ejercicios en una fila hasta 700 px; las videolecciones en fila hasta 600 px. Sin año académico.
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `ejercicios/` | Ejercicios y videolecciones | 610 |
+| `ejercicios/` | Ejercicios y videolecciones | 630 |
 
 ## Unidades temáticas
 `unidades/index.html` → página para la página de Canvas «Unidades temáticas» (a la que enlaza el banner de la portada). Identidad de marca de la asignatura.

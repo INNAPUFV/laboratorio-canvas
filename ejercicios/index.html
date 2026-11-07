@@ -114,6 +114,14 @@ a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
   <section aria-labelledby="s1">
     <h2 class="seccion" id="s1"><span class="num">01</span>Mira · Videolecciones</h2>
     <div class="videos">
+    <a class="video" data-enlace="vl0">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+      <span class="txt">
+        <span class="label">Videolección 0</span>
+        <h3>La estructura de la noticia</h3>
+        <span class="ir">Ver <svg class="fl" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </span>
+    </a>
     <a class="video" data-enlace="vl1">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
       <span class="txt">
@@ -127,14 +135,6 @@ a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
       <span class="txt">
         <span class="label">Videolección 2</span>
         <h3>La entradilla</h3>
-        <span class="ir">Ver <svg class="fl" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-      </span>
-    </a>
-    <a class="video" data-enlace="vl3">
-      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
-      <span class="txt">
-        <span class="label">Videolección 3</span>
-        <h3>Cómo hacer titulares</h3>
         <span class="ir">Ver <svg class="fl" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
       </span>
     </a>
@@ -182,9 +182,9 @@ a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 /* ENLACES: pega entre comillas la dirección de cada elemento.
    Se abren en una pestaña nueva para salir del iframe. Vacío = «Próximamente». */
 const ENLACES = {
+  "vl0": "",   // Videolección 0 · La estructura de la noticia
   "vl1": "https://ufv-es.instructure.com/courses/70362/assignments/579070",   // Videolección 1 · Cabeza de titulación
   "vl2": "https://ufv-es.instructure.com/courses/70362/assignments/579071",   // Videolección 2 · La entradilla
-  "vl3": "",   // Videolección 3 · Cómo hacer titulares (antes «Clase online»)
   "ej1": "https://ufv-es.instructure.com/courses/70362/assignments/579025",   // Ejercicio 1 · Cabeza de titulación
   "ej2": "https://ufv-es.instructure.com/courses/70362/assignments/579027",   // Ejercicio 2 · Cabeza de titulación y entradilla
   "ej3": "https://ufv-es.instructure.com/courses/70362/assignments/579024",   // Ejercicio 3 · Jerarquización y ordenación lógica
