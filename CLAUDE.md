@@ -89,6 +89,7 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 `profesor/index.html` → cabecera apaisada y compacta para la página de Canvas «Profesor y enfoque de la asignatura». Identidad de marca de la asignatura.
 - Un solo bloque amarillo en horizontal: a la izquierda, el retrato (foto de Javier de la Rosa, JPG 360×360 en base64) con la animación del antiguo GIF rehecha en CSS/SVG: dos arcos blancos que giran en sentidos opuestos, un aro que orbita y un «+» que gira. A la derecha, «Profesor de la asignatura», nombre en Anton en una línea, el lema «Para buscar la verdad es necesario creer en ella» con tres triángulos que se encienden en secuencia, y el botón de LinkedIn en negro puro (logo en una tinta, pestaña nueva). Respeta `prefers-reduced-motion`.
 - En móvil (≤600 px) el retrato pasa arriba.
+- **Sin año académico** en la cabecera (solo «Narrativa Periodística I»), para que sirva todos los cursos sin cambios.
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
