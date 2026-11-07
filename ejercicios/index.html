@@ -182,14 +182,14 @@ a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 /* ENLACES: pega entre comillas la dirección de cada elemento.
    Se abren en una pestaña nueva para salir del iframe. Vacío = «Próximamente». */
 const ENLACES = {
-  "vl1": "",   // Videolección 1 · Cabeza de titulación
-  "vl2": "",   // Videolección 2 · La entradilla
+  "vl1": "https://ufv-es.instructure.com/courses/70362/assignments/579070",   // Videolección 1 · Cabeza de titulación
+  "vl2": "https://ufv-es.instructure.com/courses/70362/assignments/579071",   // Videolección 2 · La entradilla
   "vl3": "",   // Videolección 3 · Cómo hacer titulares (antes «Clase online»)
-  "ej1": "",   // Ejercicio 1 · Cabeza de titulación
-  "ej2": "",   // Ejercicio 2 · Cabeza de titulación y entradilla
-  "ej3": "",   // Ejercicio 3 · Jerarquización y ordenación lógica
-  "ej4": "",   // Ejercicio 4 · Cobertura de una rueda de prensa
-  "ej5": ""    // Ejercicio 5 · Cobertura informativa
+  "ej1": "https://ufv-es.instructure.com/courses/70362/assignments/579025",   // Ejercicio 1 · Cabeza de titulación
+  "ej2": "https://ufv-es.instructure.com/courses/70362/assignments/579027",   // Ejercicio 2 · Cabeza de titulación y entradilla
+  "ej3": "https://ufv-es.instructure.com/courses/70362/assignments/579024",   // Ejercicio 3 · Jerarquización y ordenación lógica
+  "ej4": "https://ufv-es.instructure.com/courses/70362/assignments/579010",   // Ejercicio 4 · Cobertura de una rueda de prensa
+  "ej5": "https://ufv-es.instructure.com/courses/70362/assignments/579014"    // Ejercicio 5 · Cobertura informativa
 };
 document.querySelectorAll('[data-enlace]').forEach(a => {
   const url = (ENLACES[a.dataset.enlace] || '').trim();
