@@ -123,7 +123,7 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 - Cuatro tarjetas 2×2 que **conservan los banners animados originales de cada unidad** (1 Los géneros periodísticos · 2 La noticia · 3 La estructura de la noticia · 4 El estilo periodístico informativo), con un pie blanco (filete negro de 2 px, «Unidad N», título en Anton y acción).
 - **Los GIF originales (18–29 MB cada uno, ~93 MB en total) se convirtieron a MP4** H.264 de 800 px (`media/u1…u4.mp4`, 0,2–0,5 MB; ~1,3 MB en total) con imagen fija `media/u1…u4.jpg` (`poster`). `<video muted loop playsinline preload="none">`: se cargan y reproducen solo mientras están a la vista (IntersectionObserver) y se pausan fuera; con `prefers-reduced-motion` queda la imagen fija.
 - Para cambiar un banner: `ffmpeg -i banner.gif -vf "scale=800:-2:flags=lanczos,fps=25" -c:v libx264 -preset veryfast -crf 27 -pix_fmt yuv420p -movflags +faststart -an media/uN.mp4` y sacar la imagen fija con `ffmpeg -ss <segundo> -i media/uN.mp4 -frames:v 1 -q:v 5 media/uN.jpg`.
-- Enlaces en el bloque `ENLACES` (claves `u1`–`u4`; pestaña nueva); vacío = «Próximamente». **Pendiente: los cuatro enlaces.**
+- Enlaces en el bloque `ENLACES` (claves `u1`–`u4`; pestaña nueva); vacío = «Próximamente». Páginas de Canvas `…/courses/70362/pages/unidad-1` … `unidad-4`.
 
 | Carpeta | Pieza | iframe |
 |---|---|---|

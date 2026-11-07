@@ -112,10 +112,10 @@ a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 <script>
 /* ENLACES: pega entre comillas la dirección de cada unidad (pestaña nueva). Vacío = «Próximamente». */
 const ENLACES = {
-  "u1": "",   // Unidad 1 · Los géneros periodísticos
-  "u2": "",   // Unidad 2 · La noticia
-  "u3": "",   // Unidad 3 · La estructura de la noticia
-  "u4": ""    // Unidad 4 · El estilo periodístico informativo
+  "u1": "https://ufv-es.instructure.com/courses/70362/pages/unidad-1",   // Unidad 1 · Los géneros periodísticos
+  "u2": "https://ufv-es.instructure.com/courses/70362/pages/unidad-2",   // Unidad 2 · La noticia
+  "u3": "https://ufv-es.instructure.com/courses/70362/pages/unidad-3",   // Unidad 3 · La estructura de la noticia
+  "u4": "https://ufv-es.instructure.com/courses/70362/pages/unidad-4"    // Unidad 4 · El estilo periodístico informativo
 };
 document.querySelectorAll('[data-enlace]').forEach(a => {
   const url = (ENLACES[a.dataset.enlace] || '').trim();
