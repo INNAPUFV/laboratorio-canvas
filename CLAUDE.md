@@ -98,9 +98,9 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 
 ## Cuadernos
 `cuadernos/index.html` → página compacta para la página de Canvas «Cuaderno general de la asignatura y bibliografía» (a la que enlaza la tarjeta Cuadernos de la portada). Sustituye a las dos imágenes con «NotebookLM».
-- Cabecera «Cuadernos de la asignatura» + dos tarjetas carbón con filete amarillo (como interfaz): cuadro amarillo con el logo de Gemini Notebook en una tinta, título en Anton, una línea de texto y «Abrir el cuaderno ↗»; número tenue 01/02. Sin año académico.
+- Texto mínimo y sin repetir «cuaderno» (Notebook ya lo dice): etiqueta «Estudia», titular «Gemini Notebook» + «Pregunta a la IA y repasa con las fuentes de la asignatura», y dos tarjetas carbón con filete amarillo: cuadro amarillo con el logo de Gemini Notebook, título en Anton («General» / «Bibliografía»), una línea («Todos los materiales del curso» / «Fuentes y lecturas de referencia») y «Abrir ↗»; número tenue 01/02. Sin año académico.
 - Enlaces: general → `notebook.google.com/notebook/653e92f2-…`; bibliografía → `notebook.google.com/notebook/412e9b0f-…/preview`.
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `cuadernos/` | Cuadernos de la asignatura en Gemini Notebook (general y bibliografía) | 420 |
+| `cuadernos/` | Cuadernos de la asignatura en Gemini Notebook (general y bibliografía) | 340 |
