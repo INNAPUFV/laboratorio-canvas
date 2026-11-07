@@ -13,6 +13,7 @@ portada/         portada HTML del curso (página de inicio de Canvas)
 plan-trabajo/    plan de trabajo interactivo de Narrativa Periodística I (27 sesiones)
 profesor/        cabecera del profesor (Javier de la Rosa) con retrato animado y enlace a LinkedIn
 cuadernos/       accesos a los cuadernos de Gemini Notebook (general y bibliografía)
+ejercicios/      ejercicios y videolecciones (3 videolecciones + 5 ejercicios)
 anuncio/         anuncios de la asignatura con su identidad de marca (una subcarpeta por anuncio)
 comunicaciones/  comunicaciones con estilo UFV: anuncios, banners de tablero y correos
 multimedia/      recursos didácticos interactivos (animaciones, reproductores…)
@@ -104,3 +105,13 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | Carpeta | Pieza | iframe |
 |---|---|---|
 | `cuadernos/` | Cuadernos de la asignatura en Gemini Notebook (general y bibliografía) | 340 |
+
+## Ejercicios y videolecciones
+`ejercicios/index.html` → página para la página de Canvas «Ejercicios y videolecciones» (a la que enlaza la portada). Sustituye a los banners de imagen. Identidad de marca de la asignatura.
+- Cabecera «Ejercicios y videolecciones» + «Mira · Practica · Aprende». Dos secciones con rótulo numerado, como la portada: **01 Mira · Videolecciones** (3 tarjetas carbón con botón de reproducir amarillo: 1 Cabeza de titulación · 2 La entradilla · **3 Cómo hacer titulares**, antes «Clase online cómo hacer titulares») y **02 Practica · Ejercicios** (5 tarjetas blancas con número grande en Anton: 1 Cabeza de titulación · 2 Cabeza de titulación y entradilla · 3 Jerarquización y ordenación lógica · 4 Cobertura de una rueda de prensa · 5 Cobertura informativa).
+- Enlaces en el bloque `ENLACES` (claves `vl1`–`vl3`, `ej1`–`ej5`; pestaña nueva); vacío = «Próximamente». **Pendiente: todos los enlaces.**
+- Los cinco ejercicios en una fila hasta 700 px; las videolecciones en fila hasta 600 px. Sin año académico.
+
+| Carpeta | Pieza | iframe |
+|---|---|---|
+| `ejercicios/` | Ejercicios y videolecciones | 610 |
