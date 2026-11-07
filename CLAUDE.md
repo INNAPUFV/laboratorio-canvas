@@ -115,7 +115,7 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `ejercicios/` | Ejercicios y videolecciones | 630 |
+| `ejercicios/` | Ejercicios y videolecciones | 780 |
 
 ## Unidades temáticas
 `unidades/index.html` → página para la página de Canvas «Unidades temáticas» (a la que enlaza el banner de la portada). Identidad de marca de la asignatura.
