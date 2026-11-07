@@ -14,6 +14,7 @@ plan-trabajo/    plan de trabajo interactivo de Narrativa Periodística I (27 se
 profesor/        cabecera del profesor (Javier de la Rosa) con retrato animado y enlace a LinkedIn
 cuadernos/       accesos a los cuadernos de Gemini Notebook (general y bibliografía)
 ejercicios/      ejercicios y videolecciones (3 videolecciones + 5 ejercicios)
+unidades/        unidades temáticas con los banners animados de cada unidad (media/: MP4 + JPG)
 anuncio/         anuncios de la asignatura con su identidad de marca (una subcarpeta por anuncio)
 comunicaciones/  comunicaciones con estilo UFV: anuncios, banners de tablero y correos
 multimedia/      recursos didácticos interactivos (animaciones, reproductores…)
@@ -115,3 +116,15 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | Carpeta | Pieza | iframe |
 |---|---|---|
 | `ejercicios/` | Ejercicios y videolecciones | 610 |
+
+## Unidades temáticas
+`unidades/index.html` → página para la página de Canvas «Unidades temáticas» (a la que enlaza el banner de la portada). Identidad de marca de la asignatura.
+- Cabecera: banner carbón con filete amarillo, «Unidades temáticas» en Anton y el lema «Estudia. Practica. Aprende.» en amarillo (como en la portada).
+- Cuatro tarjetas 2×2 que **conservan los banners animados originales de cada unidad** (1 Los géneros periodísticos · 2 La noticia · 3 La estructura de la noticia · 4 El estilo periodístico informativo), con un pie blanco (filete negro de 2 px, «Unidad N», título en Anton y acción).
+- **Los GIF originales (18–29 MB cada uno, ~93 MB en total) se convirtieron a MP4** H.264 de 800 px (`media/u1…u4.mp4`, 0,2–0,5 MB; ~1,3 MB en total) con imagen fija `media/u1…u4.jpg` (`poster`). `<video muted loop playsinline preload="none">`: se cargan y reproducen solo mientras están a la vista (IntersectionObserver) y se pausan fuera; con `prefers-reduced-motion` queda la imagen fija.
+- Para cambiar un banner: `ffmpeg -i banner.gif -vf "scale=800:-2:flags=lanczos,fps=25" -c:v libx264 -preset veryfast -crf 27 -pix_fmt yuv420p -movflags +faststart -an media/uN.mp4` y sacar la imagen fija con `ffmpeg -ss <segundo> -i media/uN.mp4 -frames:v 1 -q:v 5 media/uN.jpg`.
+- Enlaces en el bloque `ENLACES` (claves `u1`–`u4`; pestaña nueva); vacío = «Próximamente». **Pendiente: los cuatro enlaces.**
+
+| Carpeta | Pieza | iframe |
+|---|---|---|
+| `unidades/` | Unidades temáticas con banners animados | 990 |
