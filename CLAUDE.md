@@ -12,6 +12,7 @@ assets/          ufv.css (copia propia, independiente de formacion-ia) + contact
 portada/         portada HTML del curso (página de inicio de Canvas)
 plan-trabajo/    plan de trabajo interactivo de Narrativa Periodística I (27 sesiones)
 profesor/        cabecera del profesor (Javier de la Rosa) con retrato animado y enlace a LinkedIn
+cuadernos/       accesos a los cuadernos de Gemini Notebook (general y bibliografía)
 anuncio/         anuncios de la asignatura con su identidad de marca (una subcarpeta por anuncio)
 comunicaciones/  comunicaciones con estilo UFV: anuncios, banners de tablero y correos
 multimedia/      recursos didácticos interactivos (animaciones, reproductores…)
@@ -94,3 +95,12 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | Carpeta | Pieza | iframe |
 |---|---|---|
 | `profesor/` | Cabecera del profesor con retrato animado y enlace a LinkedIn | 410 |
+
+## Cuadernos
+`cuadernos/index.html` → página compacta para la página de Canvas «Cuaderno general de la asignatura y bibliografía» (a la que enlaza la tarjeta Cuadernos de la portada). Sustituye a las dos imágenes con «NotebookLM».
+- Cabecera «Cuadernos de la asignatura» + dos tarjetas carbón con filete amarillo (como interfaz): cuadro amarillo con el logo de Gemini Notebook en una tinta, título en Anton, una línea de texto y «Abrir el cuaderno ↗»; número tenue 01/02. Sin año académico.
+- Enlaces: general → `notebook.google.com/notebook/653e92f2-…`; bibliografía → `notebook.google.com/notebook/412e9b0f-…/preview`.
+
+| Carpeta | Pieza | iframe |
+|---|---|---|
+| `cuadernos/` | Cuadernos de la asignatura en Gemini Notebook (general y bibliografía) | 420 |
