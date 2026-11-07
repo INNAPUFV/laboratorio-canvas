@@ -86,10 +86,10 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | `anuncio/evalua-unidad-2/` | Recordatorio compacto: «Evalúa tu conocimiento» de la Unidad 2, plazo hasta el jueves 5/11/2026 a las 23:59, con cuenta atrás (hora de Madrid) y botón a la tarea 579116. Variante «recordatorio» de dos bloques (amarillo + negro puro): la actividad es el titular (Anton) con la unidad en etiqueta negra grande; «Aún estás a tiempo» encabeza el bloque del plazo; debajo, bloque de repaso (banda negra con logo de Gemini Notebook + botón secundario) al cuaderno de la Unidad 2 con cuestionarios y fichas | 750 |
 
 ## Profesor
-`profesor/index.html` → cabecera compacta para la página de Canvas «Profesor y enfoque de la asignatura». Identidad de marca de la asignatura.
-- Bloque amarillo: «Profesor de la asignatura», nombre en Anton y el lema «Para buscar la verdad es necesario creer en ella», con tres triángulos que se encienden en secuencia. A la derecha, el retrato (recortado del GIF original, JPG 320×320 en base64) con la animación del GIF rehecha en CSS/SVG: dos arcos blancos que giran en sentidos opuestos, un aro que orbita y un «+» que gira. Respeta `prefers-reduced-motion`.
-- Franja de LinkedIn en negro puro (enlace en pestaña nueva) con el logo de LinkedIn en una tinta sobre cuadro amarillo.
+`profesor/index.html` → cabecera apaisada y compacta para la página de Canvas «Profesor y enfoque de la asignatura». Identidad de marca de la asignatura.
+- Un solo bloque amarillo en horizontal: a la izquierda, el retrato (foto de Javier de la Rosa, JPG 360×360 en base64) con la animación del antiguo GIF rehecha en CSS/SVG: dos arcos blancos que giran en sentidos opuestos, un aro que orbita y un «+» que gira. A la derecha, «Profesor de la asignatura», nombre en Anton en una línea, el lema «Para buscar la verdad es necesario creer en ella» con tres triángulos que se encienden en secuencia, y el botón de LinkedIn en negro puro (logo en una tinta, pestaña nueva). Respeta `prefers-reduced-motion`.
+- En móvil (≤600 px) el retrato pasa arriba.
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `profesor/` | Cabecera del profesor con retrato animado y enlace a LinkedIn | 550 |
+| `profesor/` | Cabecera del profesor con retrato animado y enlace a LinkedIn | 410 |
