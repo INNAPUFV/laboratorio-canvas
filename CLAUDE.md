@@ -11,6 +11,7 @@ assets/          ufv.css (copia propia, independiente de formacion-ia) + contact
   fonts/         Cooper Hewitt Heavy y Light (woff2, latin; licencia OFL en OFL-CooperHewitt.txt)
 portada/         portada HTML del curso (página de inicio de Canvas)
 plan-trabajo/    plan de trabajo interactivo de Narrativa Periodística I (27 sesiones)
+profesor/        cabecera del profesor (Javier de la Rosa) con retrato animado y enlace a LinkedIn
 anuncio/         anuncios de la asignatura con su identidad de marca (una subcarpeta por anuncio)
 comunicaciones/  comunicaciones con estilo UFV: anuncios, banners de tablero y correos
 multimedia/      recursos didácticos interactivos (animaciones, reproductores…)
@@ -83,3 +84,12 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 | `anuncio/sesion-07-mesa-redonda/` | Sesión 7 · Mesa redonda «La IA y la protección de la persona desde una mirada basada en virtudes» (23/10/2026) | 1440 |
 | `anuncio/nuevo-diseno/` | Nota informativa «Nuevo diseño, mismos contenidos» (26/10/2026). Miniatura animada de la portada: los mismos 10 accesos pasan del orden antiguo a las cuatro secciones (FLIP con Web Animations; se reproduce una vez al verse; botones Antes/Ahora; respeta `prefers-reduced-motion`) | 1520 |
 | `anuncio/evalua-unidad-2/` | Recordatorio compacto: «Evalúa tu conocimiento» de la Unidad 2, plazo hasta el jueves 5/11/2026 a las 23:59, con cuenta atrás (hora de Madrid) y botón a la tarea 579116. Variante «recordatorio» de dos bloques (amarillo + negro puro): la actividad es el titular (Anton) con la unidad en etiqueta negra grande; «Aún estás a tiempo» encabeza el bloque del plazo; debajo, bloque de repaso (banda negra con logo de Gemini Notebook + botón secundario) al cuaderno de la Unidad 2 con cuestionarios y fichas | 750 |
+
+## Profesor
+`profesor/index.html` → cabecera compacta para la página de Canvas «Profesor y enfoque de la asignatura». Identidad de marca de la asignatura.
+- Bloque amarillo: «Profesor de la asignatura», nombre en Anton y el lema «Para buscar la verdad es necesario creer en ella», con tres triángulos que se encienden en secuencia. A la derecha, el retrato (recortado del GIF original, JPG 320×320 en base64) con la animación del GIF rehecha en CSS/SVG: dos arcos blancos que giran en sentidos opuestos, un aro que orbita y un «+» que gira. Respeta `prefers-reduced-motion`.
+- Franja de LinkedIn en negro puro (enlace en pestaña nueva) con el logo de LinkedIn en una tinta sobre cuadro amarillo.
+
+| Carpeta | Pieza | iframe |
+|---|---|---|
+| `profesor/` | Cabecera del profesor con retrato animado y enlace a LinkedIn | 550 |
