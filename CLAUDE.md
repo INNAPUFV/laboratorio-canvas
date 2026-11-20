@@ -67,12 +67,12 @@ Piezas autónomas (no usan `ufv.css`; fuentes UFV desde Google Fonts).
 - La pareja de la semana en curso se marca sola con «Esta semana» (según `data-fecha`).
 - **Estructura de cada tarjeta** (`div.card`): un `button.toggle` invisible que cubre la tarjeta y la abre o fija (lleva `aria-expanded` y el `aria-label`), y por encima el contenido (`.front` / `.back`, `z-index:2`). Así un enlace puede ir dentro de `.back` sin estar dentro del botón.
 - **Enlaces a tareas de Canvas** en la tarjeta virtual: al final de `.back`, `<a class="tarea" href="…/courses/70362/assignments/NNN" target="_blank" rel="noopener noreferrer">Texto · Unidad N <svg…></a>`; en `.front`, la etiqueta `<span class="tag">Tarea en Canvas</span>`; y en el `aria-label` del botón, «, con enlace a la tarea en Canvas». El enlace solo se ve y se puede pulsar con la tarjeta abierta (ratón: al pasar; móvil: primer toque abre, segundo toque en el botón amarillo navega; teclado: Tab abre y Tab de nuevo llega al enlace). Usar siempre la dirección base de la tarea (`/assignments/NNN`), no `/launch` ni `/taking/…`, que son de un intento concreto.
-- Tareas enlazadas: sesión 4 → Evalúa tu conocimiento · Unidad 1 (579130); sesión 8 → Evalúa tu conocimiento · Unidad 2 (579116). Pendiente: sesión 13 → Unidad 3.
+- Tareas enlazadas: sesión 4 → Evalúa tu conocimiento · Unidad 1 (579130); sesión 8 → Evalúa tu conocimiento · Unidad 2 (579116); sesión 11 → «Ver la videolección 0: La estructura de la noticia», botón «Ver videolección 0» (627763). Pendiente: sesión 13 → Unidad 3.
 - En móvil (≤540 px) las tarjetas pasan a una columna, así que la página es más alta que el iframe: el iframe va **sin** `scrolling="no"` para que en móvil se pueda desplazar dentro.
 
 | Carpeta | Pieza | iframe |
 |---|---|---|
-| `plan-trabajo/` | Plan de trabajo interactivo de Narrativa Periodística I | 4900 |
+| `plan-trabajo/` | Plan de trabajo interactivo de Narrativa Periodística I | 4950 |
 
 ## Anuncios de la asignatura
 `anuncio/<sesion-NN-tema>/index.html` → anuncios de Narrativa Periodística I para Canvas, con la **identidad de marca de la asignatura** (no el estilo UFV de `comunicaciones/`). Guía: proyecto → `claude/Identidad visual (anuncios y PlumIA).md` y `claude/Identidad visual de marca (guía unificada).md`.
