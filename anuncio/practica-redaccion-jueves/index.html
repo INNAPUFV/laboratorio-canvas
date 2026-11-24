@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- No indexar en buscadores -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="light">
+<title>Recordatorio · Práctica de redacción del jueves | Narrativa Periodística I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600;700;800&display=swap">
+<link rel="preload" href="../../assets/fonts/CooperHewitt-Heavy.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Identidad de marca de la asignatura (guía unificada v2.8): Anton · Cooper Hewitt · Open Sans.
+   Recordatorio con animación: un despertador que llega a las 8:30 y suena.
+   El Rojo ACN solo en las ondas del timbre (acento puntual, sobre blanco, lejos del amarillo). */
+@font-face{font-family:'Cooper Hewitt'; src:url('../../assets/fonts/CooperHewitt-Heavy.woff2') format('woff2'); font-weight:800; font-display:swap}
+@font-face{font-family:'Cooper Hewitt'; src:url('../../assets/fonts/CooperHewitt-Light.woff2') format('woff2'); font-weight:300; font-display:swap}
+:root{--yellow:#FDDA48;--ink:#0F1010;--stone:#393836;--paper:#fff;--red:#FF5757;--muted:#676762;--line:#D9D9D3;--practice:#FAFAF8;
+  --f-display:'Anton',Impact,sans-serif;--f-label:'Cooper Hewitt','Open Sans',Arial,sans-serif;--f-body:'Open Sans',Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);-webkit-font-smoothing:antialiased}
+main{max-width:1080px;margin:auto;padding:28px clamp(14px,4vw,40px) 46px}
+.label{font-family:var(--f-label);font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:12px}
+
+/* Cabecera */
+.topline{display:flex;align-items:center;justify-content:space-between;gap:8px 12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:12px}
+.edition{color:var(--stone)}
+.tag{background:var(--yellow);padding:6px 10px;white-space:nowrap}
+
+/* Bloque amarillo */
+.hero{background:var(--yellow);padding:clamp(24px,5vw,52px);position:relative;overflow:hidden;isolation:isolate}
+.hero:before{content:"8:30";position:absolute;right:clamp(10px,3vw,34px);bottom:-.17em;font:400 clamp(130px,23vw,280px)/1 var(--f-display);color:rgba(15,16,16,.075);z-index:-1;pointer-events:none}
+.kicker{margin:0 0 20px}
+.hero h1{font:400 clamp(36px,6vw,68px)/1.05 var(--f-display);text-transform:uppercase;margin:0;letter-spacing:.005em}
+.hero .sub{font-size:clamp(16px,2vw,20px);line-height:1.55;max-width:640px;margin:18px 0 0}
+
+/* Franja de datos en negro puro */
+.facts{display:grid;grid-template-columns:1fr 1fr;background:var(--ink);color:#fff}
+.fact{padding:22px 28px;display:flex;gap:17px;align-items:center}
+.fact+.fact{border-left:1px solid #474844}
+.ico{display:grid;place-items:center;width:42px;height:42px;flex:none;background:var(--yellow);color:var(--ink)}
+.ico svg{width:23px;height:23px}
+.fact small{display:block;color:var(--yellow);margin-bottom:6px;font-size:11px}
+.fact strong{font:300 clamp(15px,1.8vw,19px)/1.35 var(--f-label)}
+.fact strong b{font-weight:800}
+
+/* Despertador */
+.alarma{display:grid;grid-template-columns:minmax(170px,240px) 1fr;align-items:center;gap:8px clamp(20px,4vw,44px);margin-top:20px;padding:clamp(20px,3.5vw,34px) clamp(20px,4vw,40px);background:var(--practice);border:1px solid var(--line);border-top:5px solid var(--ink)}
+.escena{width:100%;height:auto;display:block;overflow:visible}
+.alarma h2{font:400 clamp(30px,4.6vw,52px)/1.05 var(--f-display);text-transform:uppercase;margin:6px 0 12px}
+.alarma p{font-size:clamp(15px,1.7vw,17px);line-height:1.6;margin:0;max-width:520px}
+.repetir{margin-top:18px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);border:1.5px solid var(--ink);padding:9px 14px;cursor:pointer;font:800 11.5px var(--f-label);letter-spacing:.14em;text-transform:uppercase}
+.repetir:hover{background:var(--ink);color:#fff}
+.repetir:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.repetir svg{width:15px;height:15px}
+.eyebrow{color:var(--muted)}
+
+/* Piezas del reloj: estado final por defecto (8:30, sonando) */
+.reloj,.aguja{transform-box:view-box}
+.reloj{transform-origin:100px 118px}
+.aguja{transform-origin:100px 118px}
+.minutero{transform:rotate(180deg)}
+.horaria{transform:rotate(255deg)}
+.ondas path{stroke:var(--red)}
+.zzz text{opacity:0}
+
+/* Animación (se añade la clase .play al verse; dura unos 3 s) */
+.play .minutero{animation:minutero 1.5s cubic-bezier(.45,0,.55,1) both}
+.play .horaria{animation:horaria 1.5s cubic-bezier(.45,0,.55,1) both}
+.play .zzz text{animation:zzz 1.5s ease-out both}
+.play .zzz text:nth-child(2){animation-delay:.25s}
+.play .zzz text:nth-child(3){animation-delay:.5s}
+.play .reloj{animation:dormido 1.5s ease-in-out both, timbre .11s linear 1.5s 9}
+.play .ondas{animation:ondas 1.2s ease-out 1.5s both}
+.play .titular{animation:llega .45s cubic-bezier(.2,1.4,.4,1) 1.55s both}
+@keyframes minutero{from{transform:rotate(0deg)}to{transform:rotate(180deg)}}
+@keyframes horaria{from{transform:rotate(240deg)}to{transform:rotate(255deg)}}
+@keyframes zzz{0%{opacity:0;transform:translate(0,8px)}35%{opacity:1}100%{opacity:0;transform:translate(10px,-26px)}}
+@keyframes dormido{0%,100%{transform:rotate(0)}50%{transform:rotate(-4deg)}}
+@keyframes timbre{0%,100%{transform:rotate(0) translateY(0)}25%{transform:rotate(-7deg) translateY(-3px)}75%{transform:rotate(7deg) translateY(-3px)}}
+@keyframes ondas{0%{opacity:0;transform:scale(.85)}25%{opacity:1;transform:scale(1.08)}55%{opacity:.5;transform:scale(1)}80%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes llega{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
+.ondas{transform-box:view-box;transform-origin:100px 110px}
+
+.foot{margin-top:24px;border-top:1px solid var(--line);padding-top:13px;display:flex;justify-content:space-between;gap:6px 10px;flex-wrap:wrap;color:var(--muted);font-size:12px;letter-spacing:.045em}
+.foot span{font-family:var(--f-label);font-weight:800;text-transform:uppercase}
+
+@media(max-width:650px){
+  main{padding:12px 10px 25px}
+  .topline .label,.topline.label{font-size:10px}
+  .hero{padding:28px 21px}
+  .facts{grid-template-columns:1fr}
+  .fact{padding:17px 20px}
+  .fact+.fact{border-left:0;border-top:1px solid #474844}
+  .alarma{grid-template-columns:1fr;text-align:center;padding:22px 18px 26px}
+  .escena{max-width:170px;margin:0 auto}
+  .alarma p{margin:0 auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .play *{animation:none !important}
+  .repetir{display:none}
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="topline label"><span>Narrativa Periodística I <span class="edition">/ 2026–2027</span></span><span class="tag">Recordatorio · Jueves 26/11</span></header>
+
+  <section class="hero" aria-labelledby="titulo">
+    <p class="kicker label">Este jueves, a primera hora</p>
+    <h1 id="titulo">Práctica de redacción</h1>
+    <p class="sub">Usaremos el espacio dedicado al proyecto transversal para redactar en clase. Empezamos a las 8:30 en punto.</p>
+  </section>
+
+  <section class="facts" aria-label="Información de la práctica">
+    <div class="fact"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4M17 3v4M3 10h18"/></svg></span><div><small class="label">Cuándo</small><strong><b>Jueves 26 de noviembre</b> · <span style="white-space:nowrap">8:30–10:00 h</span></strong></div></div>
+    <div class="fact"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small class="label">Dónde</small><strong>Espacio del <b>proyecto transversal</b></strong></div></div>
+  </section>
+
+  <section class="alarma" id="alarma" aria-labelledby="aviso">
+    <svg class="escena" viewBox="0 0 200 200" role="img" aria-label="Despertador que marca las 8:30 y suena">
+      <!-- Zzz: sueño antes de que suene -->
+      <g class="zzz" fill="#676762" font-family="Anton, Impact, sans-serif">
+        <text x="146" y="44" font-size="28">Z</text>
+        <text x="166" y="27" font-size="21">z</text>
+        <text x="181" y="12" font-size="16">z</text>
+      </g>
+      <g class="reloj">
+        <!-- Ondas del timbre -->
+        <g class="ondas" fill="none" stroke-width="5" stroke-linecap="round">
+          <path d="M22 44 L10 34"/><path d="M14 66 L0 64"/><path d="M38 26 L32 12"/>
+          <path d="M178 44 L190 34"/><path d="M186 66 L200 64"/><path d="M162 26 L168 12"/>
+        </g>
+        <!-- Campanas y martillo -->
+        <path d="M30 60 A30 30 0 0 1 72 26 Z" fill="#0F1010"/>
+        <path d="M170 60 A30 30 0 0 0 128 26 Z" fill="#0F1010"/>
+        <path d="M100 56 V42 M88 42 H112" stroke="#0F1010" stroke-width="6" stroke-linecap="round"/>
+        <!-- Patas -->
+        <path d="M58 168 L42 190 M142 168 L158 190" stroke="#0F1010" stroke-width="8" stroke-linecap="round"/>
+        <!-- Esfera -->
+        <circle cx="100" cy="118" r="64" fill="#0F1010"/>
+        <circle cx="100" cy="118" r="50" fill="#FFFFFF"/>
+        <g stroke="#0F1010" stroke-width="5" stroke-linecap="round">
+          <path d="M100 74 V84"/><path d="M144 118 H134"/><path d="M100 162 V152"/><path d="M56 118 H66"/>
+        </g>
+        <!-- Agujas (horaria y minutero) -->
+        <path class="aguja horaria" d="M100 118 V90" stroke="#0F1010" stroke-width="7" stroke-linecap="round"/>
+        <path class="aguja minutero" d="M100 118 V78" stroke="#0F1010" stroke-width="4.5" stroke-linecap="round"/>
+        <circle cx="100" cy="118" r="6" fill="#0F1010"/>
+      </g>
+    </svg>
+    <div>
+      <div class="eyebrow label">Pon el despertador</div>
+      <h2 class="titular" id="aviso">¡Cuidado con dormirse o llegar tarde!</h2>
+      <p>A las <strong>8:30</strong> empezamos a redactar: cada minuto cuenta. Llega con tiempo y con el sueño ya fuera.</p>
+      <button class="repetir" type="button" id="repetir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Volver a sonar</button>
+    </div>
+  </section>
+
+  <footer class="foot"><span>Narrativa Periodística I · Recordatorio</span><span>Observa · Selecciona · Contrasta · Redacta</span></footer>
+</main>
+<script>
+/* La animación se reproduce una vez al verse y con el botón «Volver a sonar».
+   Sin animación si el alumno la tiene desactivada (prefers-reduced-motion): queda el reloj en las 8:30. */
+(function(){
+  var caja=document.getElementById('alarma');
+  var quieto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function sonar(){ caja.classList.remove('play'); void caja.offsetWidth; caja.classList.add('play'); }
+  document.getElementById('repetir').addEventListener('click',sonar);
+  if(quieto) return;
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(e){ if(e[0].isIntersecting){ sonar(); io.disconnect(); } },{threshold:.5});
+    io.observe(caja);
+  } else { sonar(); }
+})();
+</script>
+</body>
+</html>
